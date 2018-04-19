@@ -2,37 +2,40 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.0.8",
+        "php": "^7.1.3",
         "ext-iconv": "*",
+        "easycorp/easyadmin-bundle": "^1.17",
+        "harmony-project/ui-bundle": "^1.1",
         "sensio/framework-extra-bundle": "^5.1",
-        "symfony/asset": "^3.4",
-        "symfony/console": "^3.4",
-        "symfony/expression-language": "^3.4",
+        "symfony/asset": "^4.0",
+        "symfony/console": "^4.0",
+        "symfony/expression-language": "^4.0",
         "symfony/flex": "^1.0",
-        "symfony/form": "^3.4",
-        "symfony/framework-bundle": "^3.4",
-        "symfony/lts": "^3",
+        "symfony/form": "^4.0",
+        "symfony/framework-bundle": "^4.0",
+        "symfony/lts": "^4@dev",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "*",
-        "symfony/process": "^3.4",
-        "symfony/security-bundle": "^3.4",
+        "symfony/process": "^4.0",
+        "symfony/security-bundle": "^4.0",
         "symfony/serializer-pack": "*",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/twig-bundle": "^3.4",
-        "symfony/validator": "^3.4",
-        "symfony/web-link": "^3.4",
+        "symfony/twig-bundle": "^4.0",
+        "symfony/validator": "^4.0",
+        "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "*",
-        "symfony/yaml": "^3.4"
+        "symfony/yaml": "^4.0"
     },
     "require-dev": {
-        "symfony/browser-kit": "^3.4",
-        "symfony/css-selector": "^3.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "symfony/browser-kit": "^4.0",
+        "symfony/css-selector": "^4.0",
         "symfony/debug-pack": "*",
-        "symfony/dotenv": "^3.4",
+        "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^3.4",
+        "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "*",
-        "symfony/web-server-bundle": "^3.4"
+        "symfony/web-server-bundle": "^4.0"
     },
     "config": {
         "preferred-install": {
@@ -52,6 +55,7 @@
     },
     "replace": {
         "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php71": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
     },
@@ -72,7 +76,7 @@
     },
     "extra": {
         "symfony": {
-            "id": "01CBF692XW16ESR2SFGJVZQGW6",
+            "id": "01CAWNCJ3XNA1XGV6FEWDDP2HY",
             "allow-contrib": false
         }
     }
