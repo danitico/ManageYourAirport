@@ -1,33 +1,108 @@
-{% extends 'base.html.twig' %}
-
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+    </style>
 {% endblock %}
 
-{% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{% block container %}
+    <div class="ui middle aligned center aligned grid">
+        <div class="row">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <img src="{{ asset('img/logo.png') }}" class="image">
+                    <div class="content">
+                        ManageYourAirport
+                    </div>
+                </h2>
+            {% for label, messages in app.flashes %}
+                <div class="ui {{ label }} message">
+                    <ul class="list">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            {% if error %}
+                <div class="ui message negative">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <form class="ui large form" action="{{ path('login') }}" method="post">
+                <div class="ui stacked segment">
+                    <div class="ui error message"></div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="_username" placeholder="Username" value="{{ last_username }}" />
+                        </div>
+                    </div>
+                    <div class="field">
+                         <div class="ui left icon input">
+                             <i class="lock icon"></i>
+                             <input type="password" name="_password" placeholder="Password"/>
+                         </div>
+                    </div>
+                    <button class="ui fluid large teal submit button">
+                        Sign in
+                    </button>
+                </div>
+            </form>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
-        {#
-            If you want to control the URL the user
-            is redirected to on success (more details below)
-            <input type="hidden" name="_target_path" value="/account" />
-        #}
-
-        <button type="submit">login</button>
-    </form>
-
+                <div class="ui message">
+                    New to ManageYourAirport? <a href="{{ path('user_registration') }}">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{#
+    If you want to control the URL the user
+    is redirected to on success (more details below)
+    <input type="hidden" name="_target_path" value="/account" />
+#}
 {% endblock %}
-
-{% block title %}Iniciar sesión{% endblock %}
-
 
 {% block javascripts %}
+    <script src="{{ asset('build/js/login.js') }}"></script>
+
+    <script !src="">
+        $(document)
+            .ready(function() {
+                $('.ui.form')
+                    .on('blur')
+                    .form({
+                        fields: {
+                            _username: {
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Introduzca un nombre de usuario'
+                                    }
+                                ]
+                            },
+                            _password: {
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Introduzca una contraseña'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
 {% endblock %}
