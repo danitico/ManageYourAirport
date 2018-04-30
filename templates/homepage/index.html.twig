@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+{% endblock %}
 
 {% block body %}
-    <a href="{{ path('login') }}">login</a>
+
 {% endblock %}
