@@ -28,14 +28,15 @@ class AppFixtures extends Fixture
     private function loadStudents(ObjectManager $manager)
     {
         $users = [
-            [ 'admin', 'ROLE_ADMIN' ],
-            [ 'sgomez', 'ROLE_USER' ],
+            [ 'admin', ['ROLE_ADMIN',], 'admin@gmail.com'             ,],
+            [ 'diego', ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',],
         ];
 
         foreach ($users as $user) {
             $entity = new User();
             $entity->setUsername($user[0]);
             $entity->setRoles($user[1]);
+            $entity->setEmail($user[2]);
             $password = $this->encoder->encodePassword($entity, 'secret');
             $entity->setPassword($password);
 
