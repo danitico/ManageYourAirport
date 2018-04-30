@@ -12,7 +12,7 @@ class HomepageController extends Controller
      */
     public function homepage()
     {
-        return $this->render('homepage/index.html.twig', [
+        return $this->render('base.html.twig', [
             'controller_name' => 'HomepageController',
         ]);
     }
