@@ -14,16 +14,26 @@ class AppFixtures extends Fixture
      */
     private $encoder;
 
+    /**
+     * AppFixtures constructor.
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $this->loadUsers($manager);
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     private function loadUsers(ObjectManager $manager)
     {
         $users = [
