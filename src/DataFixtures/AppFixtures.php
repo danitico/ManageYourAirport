@@ -37,8 +37,9 @@ class AppFixtures extends Fixture
     private function loadUsers(ObjectManager $manager)
     {
         $users = [
-            [ 'admin', ['ROLE_ADMIN',], 'admin@gmail.com'             ,],
-            [ 'diego', ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',],
+            [ 'admin',    ['ROLE_ADMIN',], 'admin@gmail.com'             ,],
+            [ 'diego',    ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',],
+            [ 'danitico', ['ROLE_USER' ,], 'danitico@gmail.com'          ,],
         ];
 
         foreach ($users as $user) {
