@@ -62,7 +62,7 @@ class SecurityController extends Controller
 
             $user->eraseCredentials();
 
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('security/register.html.twig', [

@@ -1,22 +1,131 @@
-{% extends 'base.html.twig' %}
-
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
 
+    </style>
 {% endblock %}
 
-{% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+{% block container %}
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal image header">
+            <img src="{{ asset('img/logo.png') }}" class="image">
+            {#<div class="content">#}
+                ManageYourAirport
+            {#</div>#}
+        </h2>
 
-    <button type="submit">Register!</button>
+        {{ form_start(form, {attr: {class: 'large'} }) }}
+        <div class="ui stacked segment">
+            {% if form.vars.errors.form.getErrors(true) is not empty %}
+                <div class="ui negative message">
+                    <ul class="list">
+                        {% for error in form.vars.errors.form.getErrors(true) %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="ui error message"></div>
+
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    {{ form_widget(form.username, { attr: { placeholder: form.username.vars.label } }) }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="mail icon"></i>
+                    {{ form_widget(form.email, { attr: { placeholder: form.email.vars.label } }) }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="key icon"></i>
+                    {{ form_widget(form.plainPassword.first, { attr: { placeholder: form.plainPassword.first.vars.label } }) }}
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="key icon"></i>
+                    {{ form_widget(form.plainPassword.second, { attr: { placeholder: form.plainPassword.second.vars.label } }) }}
+                </div>
+            </div>
+            <button class="ui fluid large teal submit button">Sign Up</button>
+        </div>
     {{ form_end(form) }}
-{% endblock %}
 
-{% block title %}Registrar usuario{% endblock %}
+    <div class="ui message">
+        <a href="{{ path('login') }}">Already have an account? Sign in</a>
+    </div>
+    </div>
+</div>
+{% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('build/js/login.js') }}"></script>
+
+    <script !src="">
+        $(document)
+            .ready(function() {
+                $('.ui.form')
+                    .on('blur')
+                    .form({
+                        fields: {
+                            register_user_username: {
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Introduce a username'
+                                    }
+                                ]
+                            },
+                            register_user_email: {
+                                rules: [
+                                    {
+                                        type: 'email',
+                                        prompt: 'Introduce a valid e-mail'
+                                    }
+                                ]
+                            },
+                            register_user_plainPassword_first: {
+                                rules: [
+                                    {
+                                        type: 'minLength[5]',
+                                        prompt: 'At least, introduce five characters'
+                                    }
+                                ]
+                            },
+                            register_user_plainPassword_second: {
+                                rules: [
+                                    {
+                                        type: 'match[register_user_plainPassword_first]',
+                                        prompt: 'Passwords are different'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
 
 {% endblock %}
