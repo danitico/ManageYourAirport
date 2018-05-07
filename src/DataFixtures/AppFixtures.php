@@ -14,21 +14,32 @@ class AppFixtures extends Fixture
      */
     private $encoder;
 
+    /**
+     * AppFixtures constructor.
+     * @param UserPasswordEncoderInterface $encoder
+     */
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $this->loadUsers($manager);
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     private function loadUsers(ObjectManager $manager)
     {
         $users = [
-            [ 'admin', ['ROLE_ADMIN',], 'admin@gmail.com'             ,],
-            [ 'diego', ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',],
+            [ 'admin',    ['ROLE_ADMIN',], 'admin@gmail.com'             ,],
+            [ 'diego',    ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',],
+            [ 'danitico', ['ROLE_USER' ,], 'danitico@gmail.com'          ,],
         ];
 
         foreach ($users as $user) {
