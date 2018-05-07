@@ -26,11 +26,12 @@ class SecurityController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
 
-        }
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
         ));
+
+
     }
 
     /**
@@ -64,7 +65,7 @@ class SecurityController extends Controller
 
             $user->eraseCredentials();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('security/register.html.twig', [
