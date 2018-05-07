@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+    {% endblock %}
+</head>
+<body>
+{% block container %}
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <img class="logo" src="{{ asset('img/logo.png') }}">
+            <a href={{ path('homepage') }} class="item">Inicio</a>
+            <a href="" class="item">Vuelos</a>
+            <a href="" class="item">Pasajeros</a>
+            <div class="right menu">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="item">
+                        <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
+                    <div class="item">
+                        <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/js/app.js') }}"></script>
+{% endblock %}
+</body>
+</html>
