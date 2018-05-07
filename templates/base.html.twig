@@ -21,7 +21,7 @@
                         <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
                     </div>
                 {% endif %}
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
                     <div class="item">
                         <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
                     </div>
