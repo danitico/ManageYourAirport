@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    {#<title>{% block title %}Welcome!{% endblock %}</title>#}
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
     {% endblock %}
@@ -11,6 +11,7 @@
 {% block container %}
     <div class="ui fixed inverted menu">
         <div class="ui container">
+            Pipo
             <img class="logo" src="{{ asset('img/logo.png') }}">
             <a href={{ path('homepage') }} class="item">Inicio</a>
             <a href="" class="item">Vuelos</a>
