@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+        {#<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">#}
     {% endblock %}
 </head>
+
+
 <body>
-{% block container %}
+
+{% block body %}
     <div class="ui fixed inverted menu">
         <div class="ui container">
             <img class="logo" src="{{ asset('img/logo.png') }}">
             <a href={{ path('homepage') }} class="item">Inicio</a>
             <a href="" class="item">Vuelos</a>
             <a href="" class="item">Pasajeros</a>
+            <a href={{ path('user_tracking') }} class="item">Mapa</a>
             <div class="right menu">
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="item">
@@ -30,8 +35,18 @@
         </div>
     </div>
 {% endblock %}
+
+{#
 {% block javascripts %}
+#}
+    {#
     <script src="{{ asset('build/js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+    #}
+{#
 {% endblock %}
+#}
+
 </body>
 </html>
