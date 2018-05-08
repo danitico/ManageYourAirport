@@ -60,7 +60,7 @@ class LocationFixtures extends Fixture
             [500.19,500.94],
             [500.63,500.78],
             [500.24,500.11],
-            [500.65,500.66],
+            [500.65,500.63],
         ];
         foreach ($locations as $location){
             $enttity= new Location();
