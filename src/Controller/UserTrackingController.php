@@ -26,8 +26,8 @@ class UserTrackingController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('user_tracking/index.html.twig', [
-            'controller_name' => 'UserTrackingController',
+        return $this->render('user_tracking/index.html.twig',[
+            'form' => $form->createView(),
         ]);
     }
 }
