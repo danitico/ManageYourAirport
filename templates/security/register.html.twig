@@ -13,11 +13,6 @@
         .column {
             max-width: 450px;
         }
-        .masthead h2 {
-            font-size: 1.7em;
-            font-weight: normal;
-        }
-
     </style>
 {% endblock %}
 
@@ -31,7 +26,7 @@
             {#</div>#}
         </h2>
 
-        {{ form_start(form, {attr: {class: 'large'} }) }}
+    {{ form_start(form, {attr: {class: 'large'} }) }}
         <div class="ui stacked segment">
             {% if form.vars.errors.form.getErrors(true) is not empty %}
                 <div class="ui negative message">
@@ -42,7 +37,7 @@
                     </ul>
                 </div>
             {% endif %}
-            <div class="ui error message"></div>
+
 
             <div class="field">
                 <div class="ui left icon input">
@@ -80,6 +75,7 @@
 {% endblock %}
 
 {% block javascripts %}
+
     <script src="{{ asset('build/js/login.js') }}"></script>
 
     <script !src="">
