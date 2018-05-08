@@ -17,65 +17,90 @@
 
 
 {% block body %}
-    <p><button onclick="geoFindMe()">Show my location</button></p>
-    <div id="out"></div>
+    {{ form_start(form) }}
+        <button type="submit">Register!</button>
+    {{ form_end(form) }}
 {% endblock %}
 
 
 {% block javascripts %}
-<script !src="">
-    function geoFindMe() {
-    var output = document.getElementById("out");
 
-    if (!navigator.geolocation){
-        output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-        return;
-    }
+    <script src="{{ asset('build/js/login.js') }}"></script>
 
-    function success(position) {
-        var latitude  = position.coords.latitude;
-        var longitude = position.coords.longitude;
+    <script !src="">
+        $(document)
+            .ready(function() {
+                $('.ui.form')
+                    .on('blur')
+                    .form({
+                        fields: {
+                            _username: {
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Introduzca un nombre de usuario'
+                                    }
+                                ]
+                            },
+                            _password: {
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: 'Introduzca una contraseña'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
 
-        output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+    <script !src="">
+        function geoFindMe() {
+        var output = document.getElementById("out");
 
-        var img = new Image();
-        img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
-
-        output.appendChild(img);
-    }
-
-    function error() {
-        output.innerHTML = "Unable to retrieve your location";
-    }
-
-    output.innerHTML = "<p>Locating…</p>";
-
-    navigator.geolocation.getCurrentPosition(success, error);
-    post('/track',{latitude:latitude,longitude:longitude});
-    }
-
-    function post(path, params, method) {
-        method = method || "post"; // Set method to post by default if not specified.
-
-        // The rest of this code assumes you are not using a library.
-        // It can be made less wordy if you use one.
-        var form = document.createElement("form");
-        form.setAttribute("method", method);
-        form.setAttribute("action", path);
-
-        for(var key in params) {
-            if(params.hasOwnProperty(key)) {
-                var hiddenField = document.createElement("input");
-                hiddenField.setAttribute("type", "hidden");
-                hiddenField.setAttribute("name", key);
-                hiddenField.setAttribute("value", params[key]);
-
-                form.appendChild(hiddenField);
-            }
+        if (!navigator.geolocation){
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
         }
 
-        document.body.appendChild(form);
-        form.submit();
-    }
-</script>
+        function success(position) {
+            var latitude  = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+
+            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+            //var img = new Image();
+            //img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+            //output.appendChild(img);
+
+        }
+
+        function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        }
+
+        output.innerHTML = "<p>Locating…</p>";
+
+        navigator.geolocation.getCurrentPosition(success, error);
+        post('/track',{latitude:latitude,longitude:longitude});
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.post("Controller/UserTrakingController.php",
+                    {
+                        latitude: latitude,
+                        longitude: longitude
+                    })
+            });
+        });
+    </script>
 {% endblock %}
