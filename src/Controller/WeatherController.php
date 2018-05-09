@@ -4,18 +4,17 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Validator\Tests\Fixtures\ToString;
 
 class WeatherController extends Controller
 {
     /**
-     * @Route("/weather", name="check_weather", methods="GET")
+     * @Route("/weather", name="weather", methods="GET")
      */
-    public function index()
+    public function index(/*Request $request*/)
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5pdGljbzk4QGdtYWlsLmNvbSIsImp0aSI6IjJiNWZmYjM0LWYxMmYtNGE2MC04MGNlLTQ0YTJlYzU5ZmQyMCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNTIwMDkyNjMzLCJ1c2VySWQiOiIyYjVmZmIzNC1mMTJmLTRhNjAtODBjZS00NGEyZWM1OWZkMjAiLCJyb2xlIjoiIn0.TWKUBWfpi1SuIl0qkwaTCtasprFR7BjQ6U_b41dKlVE",
+            CURLOPT_URL => "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/14021/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5pdGljbzk4QGdtYWlsLmNvbSIsImp0aSI6IjJiNWZmYjM0LWYxMmYtNGE2MC04MGNlLTQ0YTJlYzU5ZmQyMCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNTIwMDkyNjMzLCJ1c2VySWQiOiIyYjVmZmIzNC1mMTJmLTRhNjAtODBjZS00NGEyZWM1OWZkMjAiLCJyb2xlIjoiIn0.TWKUBWfpi1SuIl0qkwaTCtasprFR7BjQ6U_b41dKlVE",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -35,9 +34,9 @@ class WeatherController extends Controller
 
         $datos = $datos['datos'];
 
-        /*$pipo = utf8_encode(file_get_contents("https://opendata.aemet.es/opendata/sh/77d0287b"));
+        /*echo $datos;*/
 
-        var_dump(json_decode($pipo, true));*/
+        /*var_dump($datos);*/
 
         $curl1 = curl_init();
         curl_setopt_array($curl1, array(
@@ -61,18 +60,69 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
+        /*var_dump($response1);*/
 
-        foreach ($response1 as $estacion){
-            if($estacion['provincia'] == "CORDOBA"){
-                echo $estacion['nombre'];
-                echo nl2br("\n");
-            }
+        //echo $response1['0'];
 
-
+        /*echo "Probabilidad de precipitacion";
+        echo nl2br("\n");
+        foreach ($response1[0]['prediccion']['dia'][0]['probPrecipitacion'] as $values){
+            echo $values['periodo'] . " -> " . $values['value'];
+            echo nl2br("\n");
         }
+
+        echo nl2br("\n");
+        echo "Cota de nieve";
+        echo nl2br("\n");
+        foreach ($response1[0]['prediccion']['dia'][0]['cotaNieveProv'] as $values){
+            echo $values['periodo'] . " -> ";
+            if($values['value'] === ""){
+                echo "Ninguna";
+            }
+            echo nl2br("\n");
+        }
+
+        echo nl2br("\n");
+        echo "Estado del cielo";
+        echo nl2br("\n");
+        foreach ($response1[0]['prediccion']['dia'][0]['estadoCielo'] as $values){
+            echo $values['periodo'] . " -> ";
+            if($values['descripcion'] === ""){
+                echo "Despejado";
+            }
+            else{
+                echo $values['descripcion'];
+            }
+            echo nl2br("\n");
+        }
+
+        echo nl2br("\n");
+        echo "Viento";
+        echo nl2br("\n");
+        foreach ($response1[0]['prediccion']['dia'][0]['viento'] as $values){
+            echo $values['periodo'] . " -> ";
+            if($values['velocidad'] !== 0){
+                echo $values['velocidad'] . " km/h dirección " . $values['direccion'];
+            }
+            else{
+                echo $values['velocidad'];
+            }
+            echo nl2br("\n");
+        }*/
+
+        //echo "Probabilidad Precipitacion 00-06 -> " . $response1[0]['prediccion']['dia'][0]['probPrecipitacion'][1]['value'];
+
+        //var_dump($response1);
+
+
+
 
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',
+            'viento' => $response1[0]['prediccion']['dia'][0]['viento'],
+            'estado_cielo' => $response1[0]['prediccion']['dia'][0]['estadoCielo'],
+            'cota de nieve' => $response1[0]['prediccion']['dia'][0]['cotaNieveProv'],
+            'precipitacion' => $response1[0]['prediccion']['dia'][0]['probPrecipitacion'],
         ]);
     }
 }

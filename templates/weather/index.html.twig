@@ -1,8 +1,7 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'base.html.twig' %}
 
-{#{% block title %}tiempo{% endblock %}#}
+{% block title %}Tiempo ofrecido por AEMET{% endblock %}
 
-{#
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
     <style type="text/css">
@@ -18,6 +17,67 @@
         .column {
             max-width: 450px;
         }
+        main-container{
+            margin: 50px auto;
+            width: 600px;
+        }
+        table{
+            background-color: white;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td{
+            padding: 20px;
+        }
+
+        thead{
+            background-color: #246355;
+            border-bottom: solid 5px #0F362D;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background-color: #ddd;
+        }
+
+        tr:hover{
+            background-color: #369681;
+            color: white
+        }
     </style>
 {% endblock %}
-#}
+{% block body %}
+    {#<div class="ui equal width internally celled grid center aligned">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>
+                    {% for item in viento %}
+                        <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul>
+                    {% for item in estado_cielo %}
+                        <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>#}
+    <div class="main-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Numero de viaje</th><th>Maletas</th><th>Compañia</th>
+            </tr>
+            </thead>
+
+            <tr>
+                <td>Agua</td><td>Tusmuertos</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
