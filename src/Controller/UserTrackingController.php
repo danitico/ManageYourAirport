@@ -20,6 +20,8 @@ class UserTrackingController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($location);
             $manager->flush();

@@ -111,12 +111,23 @@ post({{ path('user_tracking') }}, {
                 var latitude  = position.coords.latitude;
                 var longitude = position.coords.longitude;
 
+                post('{{ path('user_tracking') }}', {
+                    latitude:latitude,
+                    longitude:longitude,
+                    _token:'{{ csrf_token('authenticate') }}',
+                });
+
                 output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
                 var img = new Image();
                 img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
+
+
                 output.appendChild(img);
+
+
+
             }
 
             function error() {
@@ -127,14 +138,6 @@ post({{ path('user_tracking') }}, {
 
             navigator.geolocation.getCurrentPosition(success, error);
 
-            post('{{ path('user_tracking') }}', {
-                location:
-                        "latitude" => "5"
-                        "longitude" => "5"
-                        "_token" => "pPo_BpZGlR_K1YmTTaxgcSzcMKAEAZnwujFrf2mwuII"
-
-
-            });
         }
 
 
