@@ -23,7 +23,7 @@ class UserTrackingController extends Controller
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($location);
             $manager->flush();
-            return $this->redirectToRoute('homepage');
+            //return $this->redirectToRoute('homepage');
         }
 
         return $this->render('user_tracking/index.html.twig',[
