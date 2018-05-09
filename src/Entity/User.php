@@ -55,53 +55,89 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $xCoordinate;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $yCoordinate;
+
     public function __construct()
     {
-
+        $this->setYCoordinate(0);
+        $this->setXCoordinate(0);
     }
 
-    // other properties and methods
-
+    /**
+     * @return mixed
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * @param $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->username;
     }
 
+    /**
+     * @param $username
+     */
     public function setUsername($username)
     {
         $this->username = $username;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPlainPassword()
     {
         return $this->plainPassword;
     }
 
+    /**
+     * @param $password
+     */
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
     }
 
+    /**
+     * @return string
+     */
     public function getPassword()
     {
         return $this->password;
     }
 
+    /**
+     * @param $password
+     */
     public function setPassword($password)
     {
         $this->password = $password;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSalt()
     {
         // The bcrypt and argon2i algorithms don't require a separate salt.
@@ -119,7 +155,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->setPlainPassword("");
     }
 
 
@@ -142,8 +178,32 @@ class User implements UserInterface
     /**
      * @param mixed $roles
      */
-    public function setRoles($roles): void
+    public function setRoles($roles)
     {
         $this->roles = $roles;
+    }
+
+    public function getXCoordinate(): ?float
+    {
+        return $this->xCoordinate;
+    }
+
+    public function setXCoordinate(float $xCoordinate): self
+    {
+        $this->xCoordinate = $xCoordinate;
+
+        return $this;
+    }
+
+    public function getYCoordinate(): ?float
+    {
+        return $this->yCoordinate;
+    }
+
+    public function setYCoordinate(float $yCoordinate): self
+    {
+        $this->yCoordinate = $yCoordinate;
+
+        return $this;
     }
 }
