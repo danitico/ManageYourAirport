@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Tests\Fixtures\ToString;
 
 class WeatherController extends Controller
 {
     /**
-     * @Route("/weather", name="weather")
+     * @Route("/weather", name="check_weather", methods="GET")
      */
     public function index()
     {
@@ -27,15 +28,47 @@ class WeatherController extends Controller
         ));
 
         $response = curl_exec($curl);
-        $err = curl_error($curl);
 
         curl_close($curl);
 
-        if($err){
-            echo "cURL Error #:" . $err;
-        }
-        else{
-            echo $response;
+        $datos = json_decode($response, true);
+
+        $datos = $datos['datos'];
+
+        /*$pipo = utf8_encode(file_get_contents("https://opendata.aemet.es/opendata/sh/77d0287b"));
+
+        var_dump(json_decode($pipo, true));*/
+
+        $curl1 = curl_init();
+        curl_setopt_array($curl1, array(
+            CURLOPT_URL => $datos,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response1 = curl_exec($curl1);
+
+        curl_close($curl1);
+
+        $response1 = utf8_encode($response1);
+
+        $response1 = json_decode($response1, true);
+
+
+        foreach ($response1 as $estacion){
+            if($estacion['provincia'] == "CORDOBA"){
+                echo $estacion['nombre'];
+                echo nl2br("\n");
+            }
+
+
         }
 
         return $this->render('weather/index.html.twig', [
