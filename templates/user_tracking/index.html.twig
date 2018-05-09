@@ -3,6 +3,7 @@
 {% block title %}tracking{% endblock %}
 
 {% block stylesheets %}
+    {{ parent() }}
     <style>
         body {
             padding: 20px;
@@ -10,15 +11,64 @@
         }
 
         p { margin : 0; }
+        button{
+            margin-top: 15px;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
+{#
+{{ csrf_token('authenticate') }}
+post({{ path('user_tracking') }}, {
+                    latitude:"5",
+                    longitude:"5",
+                    _token:'asdasd'
+                });
+
+
+        {{ form_row(form.longitude, {'value' : longitude }) }}
+        {{ form_row(form.latitude,  {'value' : latitude  }) }}
+        {% set latitude %}1{% endset %}
+        {% set longitude %}2{% endset %}
+
+
+        {{ form_start(form) }}
+            <input type="hidden" name="longitude" value=5 />
+            <input type="hidden" name="latitude"  value=5 />
+
+            <button onclick=submit>Send my location</button>
+        {{ form_end(form) }}
+
+
+        <div>
+        <form  action="{{ path('user_tracking') }}" method="post">
+            <input type="hidden" name="longitude" value=5 />
+            <input type="hidden" name="latitude"  value=5 />
+            <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+            <button onclick=submit>Send my location</button>
+        </form>
+        </div>
+#}
+
+    {% set latitude %}0{% endset %}
+    {% set longitude %}0{% endset %}
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    {{ form_start(form) }}
+        {{ form_row(form.longitude, {'value' : longitude }) }}
+        {{ form_row(form.latitude,  {'value' : latitude  }) }}
+        <input type="hidden" name="longitude" id="lon" value=5 />
+        <input type="hidden" name="latitude"  id="lat" value=5 />
+        <button onclick=submit>Send my location</button>
+    {{ form_end(form) }}
 
 
 
-    <p><button onclick="geoFindMe()">Show my location_</button></p>
-    <div id="out"></div>
+        <p><button onclick="geoFindMe()">Show my location</button></p>
+        <div id="out"></div><div id="loc"></div>
+
 
 
 
@@ -29,35 +79,74 @@
 
     <script type="text/javascript">
 
+        function post(path, params, method) {
+            method = method || "post"; // Set method to post by default if not specified.
 
-    function geoFindMe() {
-        var output = document.getElementById("out");
+            // The rest of this code assumes you are not using a library.
+            // It can be made less wordy if you use one.
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", path);
 
-        if (!navigator.geolocation){
-            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-            return;
+            for(var key in params) {
+                if(params.hasOwnProperty(key)) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
         }
 
-        function success(position) {
-            var latitude  = position.coords.latitude;
-            var longitude = position.coords.longitude;
 
-            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+        function geoFindMe() {
+            var output = document.getElementById("out");
 
-            var img = new Image();
-            img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+            if (!navigator.geolocation){
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
 
-            output.appendChild(img);
+            function success(position) {
+                var latitude  = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                document.getElementById("lon").innerHTML = position.coords.latitude;
+                document.getElementById("lat").innerHTML = position.coords.longitude;
+
+                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+                var lat=document.getElementById("lat");
+                var lon=document.getElementById("lon");
+                lat.value=latitude;
+                lon.value=longitude;
+
+                var img = new Image();
+                img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+
+
+                output.appendChild(img);
+            }
+
+            function error() {
+                output.innerHTML = "Unable to retrieve your location";
+            }
+
+            output.innerHTML = "<p>Locating…</p>";
+
+            navigator.geolocation.getCurrentPosition(success, error);
+
         }
 
-        function error() {
-            output.innerHTML = "Unable to retrieve your location";
-        }
 
-        output.innerHTML = "<p>Locating…</p>";
 
-        navigator.geolocation.getCurrentPosition(success, error);
-    }
+        geoFindMe();
+
 
     </script>
 

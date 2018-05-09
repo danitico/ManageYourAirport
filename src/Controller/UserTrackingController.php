@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Location;
 use App\Form\LocationType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,10 +17,21 @@ class UserTrackingController extends Controller
     public function index(Request $request)
     {
         $location=new Location();
-        $form = $this->createForm(LocationType::class, $location);
+        $form = $this->createFormBuilder()
+            ->add('latitude', HiddenType::class)
+            ->add('longitude', HiddenType::class)
+            ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $latitude=$request->request->get('latitude');
+            $longitude=$request->request->get('longitude');
+
+            $location->setLatitude($latitude);
+            $location->setLongitude($longitude);
+
+
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($location);
             $manager->flush();

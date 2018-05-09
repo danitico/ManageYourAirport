@@ -66,8 +66,8 @@ class LocationFixtures extends Fixture
             $enttity= new Location();
             $enttity->setLongitude($location[0]);
             $enttity->setLatitude($location[1]);
-            $manager->persist($enttity);
+            //$manager->persist($enttity);
         }
-        $manager->flush();
+        //$manager->flush();
     }
 }
