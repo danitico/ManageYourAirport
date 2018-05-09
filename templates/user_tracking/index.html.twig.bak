@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}tracking{% endblock %}
-
 {% block stylesheets %}
     <style>
         body {
@@ -12,22 +11,27 @@
         p { margin : 0; }
     </style>
 {% endblock %}
-
 {% block body %}
+    {#
+    {{ parent() }}
+    #}
 
-
-
-    <p><button onclick="geoFindMe()">Show my location_</button></p>
+    <p><button onclick="geoFindMe()">Show my location</button></p>
     <div id="out"></div>
-
+    {#
+            <div>
+                {{ form_start(form) }}
+                    {{ form_row(form.longitude) }}
+                    {{ form_row(form.latitude) }}
+                    <button onclick="geoFindMe()">Show my location</button>
+                {{ form_end(form) }}
+            </div>
+    #}
 
 
 {% endblock %}
-
-
 {% block javascripts %}
-
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
     function geoFindMe() {
@@ -59,8 +63,5 @@
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
-    </script>
-
-
-
+</script>
 {% endblock %}
