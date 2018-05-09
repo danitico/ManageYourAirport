@@ -55,9 +55,20 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $xCoordinate;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $yCoordinate;
+
     public function __construct()
     {
-
+        $this->setYCoordinate(0);
+        $this->setXCoordinate(0);
     }
 
     /**
@@ -170,5 +181,29 @@ class User implements UserInterface
     public function setRoles($roles)
     {
         $this->roles = $roles;
+    }
+
+    public function getXCoordinate(): ?float
+    {
+        return $this->xCoordinate;
+    }
+
+    public function setXCoordinate(float $xCoordinate): self
+    {
+        $this->xCoordinate = $xCoordinate;
+
+        return $this;
+    }
+
+    public function getYCoordinate(): ?float
+    {
+        return $this->yCoordinate;
+    }
+
+    public function setYCoordinate(float $yCoordinate): self
+    {
+        $this->yCoordinate = $yCoordinate;
+
+        return $this;
     }
 }
