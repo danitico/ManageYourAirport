@@ -25,7 +25,11 @@ class UserTrackingController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $latitude=$request->request->get('latitude');
+            $longitude=$request->request->get('longitude');
 
+            $location->setLatitude($latitude);
+            $location->setLongitude($longitude);
 
 
             $manager = $this->getDoctrine()->getManager();
