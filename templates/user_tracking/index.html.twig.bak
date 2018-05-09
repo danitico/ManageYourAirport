@@ -31,8 +31,7 @@
 
 {% endblock %}
 {% block javascripts %}
-
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
     function geoFindMe() {
