@@ -1,37 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}tracking{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-{% endblock %}
-{% block javascripts %}
-
-    <script type="text/javascript">
-
-
-        function tiempo() {
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=jyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqbW9udGVyb2dAYWVtZXQuZXMiLCJqdGkiOiI3NDRiYmVhMy02NDEyLTQxYWMtYmYzOC01MjhlZWJlM2FhMWEiLCJleHAiOjE0NzUwNTg3ODcsImlzcyI6IkFFTUVUIiwiaWF0IjoxNDc0NjI2Nzg3LCJ1c2VySWQiOiI3NDRiYmVhMy02NDEyLTQxYWMtYmYzOC01MjhlZWJlM2FhMWEiLCJyb2xlIjoiIn0.xh3LstTlsP9h5cxz3TLmYF4uJwhOKzA0B6-vH8lPGGw",
-                "method": "GET",
-                "headers": {
-                    "cache-control": "no-cache"
-                }
-            }
-
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-            });
+{% block stylesheets %}
+    <style>
+        body {
+            padding: 20px;
+            background-color:#ffffc9
         }
 
-    </script>
+        p { margin : 0; }
+    </style>
+{% endblock %}
 
-
-
+{% block body %}
 {% endblock %}
