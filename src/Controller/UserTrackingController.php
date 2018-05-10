@@ -24,6 +24,8 @@ class UserTrackingController extends Controller
             ->add('longitude', HiddenType::class)
             ->getForm();
 
+        $manager = $this->getDoctrine()->getManager();
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -39,15 +41,19 @@ class UserTrackingController extends Controller
             $locationsCollection = $this->getDoctrine()->getRepository('App:LocationsCollection')->getCollection(1);
             $locationsCollection[0]->addLocation($location);
 
-            $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->persist($locationsCollection[0]);
             $manager->flush();
             return $this->redirectToRoute('homepage');
         }
 
+        $user = $this->getUser();
+        $locations = $manager->getRepository('App:Location')->getAllLocations();
+        //TODO fix this ^_^
+
         return $this->render('user_tracking/single_user_location.html.twig',[
             'form' => $form->createView(),
+            'locations' => $locations,
         ]);
     }
 
@@ -57,6 +63,7 @@ class UserTrackingController extends Controller
     public function heatmap(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $locations = $manager->getRepository('App:Location')->getAllLocations();
 
         return $this->render('user_tracking/heatmap.html.twig', [
