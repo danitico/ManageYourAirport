@@ -104,6 +104,10 @@ class Location
 
     public function __toString(): ?string
     {
-        return $this->id;
+        $string="";
+        $string.=$this->getLatitude();
+        $string.=",";
+        $string.=$this->getLongitude();
+        return $string;
     }
 }

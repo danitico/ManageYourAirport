@@ -96,7 +96,7 @@
                 'rgba(63, 0, 91, 1)',
                 'rgba(127, 0, 63, 1)',
                 'rgba(191, 0, 31, 1)',
-                'rgba(255, 0, 0, 1)'
+                'rgba(255, 0, 0, 1)',
             ]
             heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
         }
@@ -112,8 +112,9 @@
         // Heatmap data: Points
         function getPoints() {
             return [
-                new google.maps.LatLng({{  }}, -4.722144),
-
+                {%  for location in locations %}
+                    new google.maps.LatLng({{  location }}),
+                {% endfor %}
 
             ];
         }
