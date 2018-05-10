@@ -32,7 +32,6 @@ class UserTrackingController extends Controller
             $latitude=$request->request->get('latitude');
             $longitude=$request->request->get('longitude');
 
-
             $location->setLatitude((float)$latitude);
             $location->setLongitude((float)$longitude);
 
@@ -44,16 +43,15 @@ class UserTrackingController extends Controller
             $manager->persist($user);
             $manager->persist($locationsCollection[0]);
             $manager->flush();
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('user_tracking');
         }
-
-        $user = $this->getUser();
-        $locations = $manager->getRepository('App:Location')->getAllLocations();
-        //TODO fix this ^_^
+        $location = array();
+        $location[] = $this->getUser()->getLocation();
+        //TODO dix this ^_^
 
         return $this->render('user_tracking/single_user_location.html.twig',[
             'form' => $form->createView(),
-            'locations' => $locations,
+            'locations' => $location,
         ]);
     }
 

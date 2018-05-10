@@ -4,17 +4,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        body {
-            padding: 20px;
-            background-color:#ffffc9
-        }
 
-        p { margin : 0; }
-        button{
-            margin-top: 15px;
-        }
-    </style>
+
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
@@ -53,66 +44,69 @@
 {% endblock %}
 
 {% block body %}
-{#
-{{ csrf_token('authenticate') }}
-post({{ path('user_tracking') }}, {
-                    latitude:"5",
-                    longitude:"5",
-                    _token:'asdasd'
-                });
-
-
-        {{ form_row(form.longitude, {'value' : longitude }) }}
-        {{ form_row(form.latitude,  {'value' : latitude  }) }}
-        {% set latitude %}1{% endset %}
-        {% set longitude %}2{% endset %}
-
-
-        {{ form_start(form) }}
-            <input type="hidden" name="longitude" value=5 />
-            <input type="hidden" name="latitude"  value=5 />
-
-            <button onclick=submit>Send my location</button>
-        {{ form_end(form) }}
-
-
-        <div>
-        <form  action="{{ path('user_tracking') }}" method="post">
-            <input type="hidden" name="longitude" value=5 />
-            <input type="hidden" name="latitude"  value=5 />
-            <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
-            <button onclick=submit>Send my location</button>
-        </form>
-        </div>
-#}
 
     {% set latitude %}0{% endset %}
     {% set longitude %}0{% endset %}
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <img class="logo" src="{{ asset('img/logo.png') }}">
+            <a href={{ path('homepage') }} class="item">Inicio</a>
+            <a href="" class="item">Vuelos</a>
+            <a href="" class="item">Pasajeros</a>
+            <a href={{ path('user_tracking') }} class="item">Mapa</a>
+            <div class="right menu">
+                <div class="item">
+                    {{ form_start(form) }}
+                    {{ form_row(form.longitude, {'value' : longitude }) }}
+                    {{ form_row(form.latitude,  {'value' : latitude  }) }}
+                        <input type="hidden" name="longitude" id="lon" value=5 />
+                        <input type="hidden" name="latitude"  id="lat" value=5 />
+                        <button onclick=submit class="ui inverted button">Update my location</button>
+                    {{ form_end(form) }}
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="item">
+                        <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
+                    <div class="item">
+                        <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.longitude, {'value' : longitude }) }}
-        {{ form_row(form.latitude,  {'value' : latitude  }) }}
-        <input type="hidden" name="longitude" id="lon" value=5 />
-        <input type="hidden" name="latitude"  id="lat" value=5 />
-        <button onclick=submit>Send my location</button>
-    {{ form_end(form) }}
+{#
+    <div id="floating-panel">
+        {{ form_start(form) }}
+            {{ form_row(form.longitude, {'value' : longitude }) }}
+            {{ form_row(form.latitude,  {'value' : latitude  }) }}
+            <input type="hidden" name="longitude" id="lon" value=0 />
+            <input type="hidden" name="latitude"  id="lat" value=0 />
+            <button onclick=submit>Update my location</button>
+        {{ form_end(form) }}
+    </div>
+#}
 
 
+    {#<p><button onclick="geoFindMe()">Show my location</button></p>#}
+    {#triggers (part of) the location loading#}
+    <div id="out" hidden></div><div id="loc"></div>
 
-        <p><button onclick="geoFindMe()">Show my location</button></p>
-        <div id="out"></div><div id="loc"></div>
 
+    <div id="map"></div>
+
+{#
     <div id="floating-panel">
         <button onclick="toggleHeatmap()">Toggle Heatmap</button>
         <button onclick="changeGradient()">Change gradient</button>
         <button onclick="changeRadius()">Change radius</button>
         <button onclick="changeOpacity()">Change opacity</button>
     </div>
-    <div id="map"></div>
-
-
+#}
 
 {% endblock %}
 
@@ -120,31 +114,6 @@ post({{ path('user_tracking') }}, {
 {% block javascripts %}
 
     <script type="text/javascript">
-
-        function post(path, params, method) {
-            method = method || "post"; // Set method to post by default if not specified.
-
-            // The rest of this code assumes you are not using a library.
-            // It can be made less wordy if you use one.
-            var form = document.createElement("form");
-            form.setAttribute("method", method);
-            form.setAttribute("action", path);
-
-            for(var key in params) {
-                if(params.hasOwnProperty(key)) {
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", params[key]);
-
-                    form.appendChild(hiddenField);
-                }
-            }
-
-            document.body.appendChild(form);
-            form.submit();
-        }
-
 
         function geoFindMe() {
             var output = document.getElementById("out");
@@ -186,12 +155,7 @@ post({{ path('user_tracking') }}, {
         }
 
 
-
-        geoFindMe();
-
-
     </script>
-
 
     <script>
 
@@ -256,8 +220,14 @@ post({{ path('user_tracking') }}, {
             ];
         }
     </script>
+
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYYrMWQ5ILWdoR5PrGyP7CZWTW5Xi-2Cg&libraries=visualization&callback=initMap">
+    </script>
+
+    {#triggers (part of) the location loading#}
+    <script>
+        geoFindMe();
     </script>
 
 
