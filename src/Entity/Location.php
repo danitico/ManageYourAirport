@@ -26,6 +26,12 @@ class Location
      */
     private $longitude;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="location", cascade={"persist", "remove"})
+     */
+    private $user;
+    
+
     public function __construct()
     {
         $this->setLatitude(0.0);
@@ -57,6 +63,24 @@ class Location
     public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newLocation = $user === null ? null : $this;
+        if ($newLocation !== $user->getLocation()) {
+            $user->setLocation($newLocation);
+        }
 
         return $this;
     }
