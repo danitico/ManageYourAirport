@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Location;
+use App\Entity\User;
 use App\Form\LocationType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,12 +29,15 @@ class UserTrackingController extends Controller
             $latitude=$request->request->get('latitude');
             $longitude=$request->request->get('longitude');
 
+
             $location->setLatitude((float)$latitude);
             $location->setLongitude((float)$longitude);
 
+            $user=$this->getUser();
+            $user->setLocation($location);
 
             $manager = $this->getDoctrine()->getManager();
-            $manager->persist($location);
+            $manager->persist($user);
             $manager->flush();
             return $this->redirectToRoute('homepage');
         }
