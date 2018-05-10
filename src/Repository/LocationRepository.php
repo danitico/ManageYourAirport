@@ -19,11 +19,17 @@ class LocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Location::class);
     }
 
-//    /**
-//     * @return Location[] Returns an array of Location objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Location[] Returns an array of Location objects
+     */
+    public function getAllLocations():array {
+        $querry = $this->createQueryBuilder('l')
+            ->getQuery();
+
+        return $querry->execute();
+    }
+
+    /*public function findByExampleField($value)
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
