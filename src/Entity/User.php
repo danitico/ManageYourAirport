@@ -56,19 +56,13 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToOne(targetEntity="App\Entity\Location", inversedBy="user", cascade={"persist", "remove"})
      */
-    private $xCoordinate;
+    private $location;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $yCoordinate;
 
     public function __construct()
     {
-        $this->setYCoordinate(0);
-        $this->setXCoordinate(0);
     }
 
     /**
@@ -183,26 +177,14 @@ class User implements UserInterface
         $this->roles = $roles;
     }
 
-    public function getXCoordinate(): ?float
+    public function getLocation(): ?Location
     {
-        return $this->xCoordinate;
+        return $this->location;
     }
 
-    public function setXCoordinate(float $xCoordinate): self
+    public function setLocation(?Location $location): self
     {
-        $this->xCoordinate = $xCoordinate;
-
-        return $this;
-    }
-
-    public function getYCoordinate(): ?float
-    {
-        return $this->yCoordinate;
-    }
-
-    public function setYCoordinate(float $yCoordinate): self
-    {
-        $this->yCoordinate = $yCoordinate;
+        $this->location = $location;
 
         return $this;
     }
