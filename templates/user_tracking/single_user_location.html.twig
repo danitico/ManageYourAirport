@@ -4,73 +4,109 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        body {
-            padding: 20px;
-            background-color:#ffffc9
-        }
 
-        p { margin : 0; }
-        button{
-            margin-top: 15px;
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        #floating-panel {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 25%;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            z-index: 5;
         }
     </style>
 {% endblock %}
 
 {% block body %}
-{#
-{{ csrf_token('authenticate') }}
-post({{ path('user_tracking') }}, {
-                    latitude:"5",
-                    longitude:"5",
-                    _token:'asdasd'
-                });
-
-
-        {{ form_row(form.longitude, {'value' : longitude }) }}
-        {{ form_row(form.latitude,  {'value' : latitude  }) }}
-        {% set latitude %}1{% endset %}
-        {% set longitude %}2{% endset %}
-
-
-        {{ form_start(form) }}
-            <input type="hidden" name="longitude" value=5 />
-            <input type="hidden" name="latitude"  value=5 />
-
-            <button onclick=submit>Send my location</button>
-        {{ form_end(form) }}
-
-
-        <div>
-        <form  action="{{ path('user_tracking') }}" method="post">
-            <input type="hidden" name="longitude" value=5 />
-            <input type="hidden" name="latitude"  value=5 />
-            <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
-            <button onclick=submit>Send my location</button>
-        </form>
-        </div>
-#}
 
     {% set latitude %}0{% endset %}
     {% set longitude %}0{% endset %}
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <img class="logo" src="{{ asset('img/logo.png') }}">
+            <a href={{ path('homepage') }} class="item">Inicio</a>
+            <a href="" class="item">Vuelos</a>
+            <a href="" class="item">Pasajeros</a>
+            <a href={{ path('user_tracking') }} class="item">Mapa</a>
+            <div class="right menu">
+                <div class="item">
+                    {{ form_start(form) }}
+                    {{ form_row(form.longitude, {'value' : longitude }) }}
+                    {{ form_row(form.latitude,  {'value' : latitude  }) }}
+                        <input type="hidden" name="longitude" id="lon" value=5 />
+                        <input type="hidden" name="latitude"  id="lat" value=5 />
+                        <button onclick=submit class="ui inverted button">Update my location</button>
+                    {{ form_end(form) }}
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="item">
+                        <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
+                    <div class="item">
+                        <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.longitude, {'value' : longitude }) }}
-        {{ form_row(form.latitude,  {'value' : latitude  }) }}
-        <input type="hidden" name="longitude" id="lon" value=5 />
-        <input type="hidden" name="latitude"  id="lat" value=5 />
-        <button onclick=submit>Send my location</button>
-    {{ form_end(form) }}
+{#
+    <div id="floating-panel">
+        {{ form_start(form) }}
+            {{ form_row(form.longitude, {'value' : longitude }) }}
+            {{ form_row(form.latitude,  {'value' : latitude  }) }}
+            <input type="hidden" name="longitude" id="lon" value=0 />
+            <input type="hidden" name="latitude"  id="lat" value=0 />
+            <button onclick=submit>Update my location</button>
+        {{ form_end(form) }}
+    </div>
+#}
 
 
+    {#<p><button onclick="geoFindMe()">Show my location</button></p>#}
+    {#triggers (part of) the location loading#}
+    <div id="out" hidden></div><div id="loc"></div>
 
-        <p><button onclick="geoFindMe()">Show my location</button></p>
-        <div id="out"></div><div id="loc"></div>
 
+    <div id="map"></div>
 
-
+{#
+    <div id="floating-panel">
+        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <button onclick="changeGradient()">Change gradient</button>
+        <button onclick="changeRadius()">Change radius</button>
+        <button onclick="changeOpacity()">Change opacity</button>
+    </div>
+#}
 
 {% endblock %}
 
@@ -78,31 +114,6 @@ post({{ path('user_tracking') }}, {
 {% block javascripts %}
 
     <script type="text/javascript">
-
-        function post(path, params, method) {
-            method = method || "post"; // Set method to post by default if not specified.
-
-            // The rest of this code assumes you are not using a library.
-            // It can be made less wordy if you use one.
-            var form = document.createElement("form");
-            form.setAttribute("method", method);
-            form.setAttribute("action", path);
-
-            for(var key in params) {
-                if(params.hasOwnProperty(key)) {
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", key);
-                    hiddenField.setAttribute("value", params[key]);
-
-                    form.appendChild(hiddenField);
-                }
-            }
-
-            document.body.appendChild(form);
-            form.submit();
-        }
-
 
         function geoFindMe() {
             var output = document.getElementById("out");
@@ -144,12 +155,80 @@ post({{ path('user_tracking') }}, {
         }
 
 
-
-        geoFindMe();
-
-
     </script>
 
+    <script>
+
+        // This example requires the Visualization library. Include the libraries=visualization
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+
+        var map, heatmap;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16 ,
+                center: {lat:37.914513 , lng: -4.719203},
+                mapTypeId: 'satellite'
+            });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: getPoints(),
+                map: map
+            });
+        }
+
+        function toggleHeatmap() {
+            heatmap.setMap(heatmap.getMap() ? null : map);
+        }
+
+        function changeGradient() {
+            var gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)',
+            ]
+            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        }
+
+        function changeRadius() {
+            heatmap.set('radius', heatmap.get('radius') ? null : 20);
+        }
+
+        function changeOpacity() {
+            heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        }
+
+        // Heatmap data: Points
+        function getPoints() {
+            return [
+                {%  for location in locations %}
+                new google.maps.LatLng({{  location }}),
+                {% endfor %}
+
+            ];
+        }
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYYrMWQ5ILWdoR5PrGyP7CZWTW5Xi-2Cg&libraries=visualization&callback=initMap">
+    </script>
+
+    {#triggers (part of) the location loading#}
+    <script>
+        geoFindMe();
+    </script>
 
 
 {% endblock %}
