@@ -115,8 +115,8 @@ post({{ path('user_tracking') }}, {
             function success(position) {
                 var latitude  = position.coords.latitude;
                 var longitude = position.coords.longitude;
-                document.getElementById("lon").innerHTML = position.coords.latitude;
-                document.getElementById("lat").innerHTML = position.coords.longitude;
+                document.getElementById("lat").innerHTML = position.coords.latitude;
+                document.getElementById("lon").innerHTML = position.coords.longitude;
 
                 output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 

@@ -1,20 +1,83 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Tiempo ofrecido por AEMET{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+        main-container{
+            margin: 50px auto;
+            width: 600px;
+        }
+        table{
+            background-color: white;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td{
+            padding: 20px;
+        }
+
+        thead{
+            background-color: #246355;
+            border-bottom: solid 5px #0F362D;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background-color: #ddd;
+        }
+
+        tr:hover{
+            background-color: #369681;
+            color: white
+        }
+    </style>
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {#<div class="ui equal width internally celled grid center aligned">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>
+                    {% for item in viento %}
+                        <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul>
+                    {% for item in estado_cielo %}
+                        <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>#}
+    <div class="main-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Numero de viaje</th><th>Maletas</th><th>Compañia</th>
+            </tr>
+            </thead>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/WeatherController.php'|file_link(0) }}">src/Controller/WeatherController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/weather/index.html.twig'|file_link(0) }}">templates/weather/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <tr>
+                <td>Agua</td><td>Tusmuertos</td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
