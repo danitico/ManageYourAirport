@@ -12,8 +12,12 @@ class LocationsController extends Controller
      */
     public function index()
     {
+        $manager = $this->getDoctrine()->getManager();
+        $locations = $manager->getRepository('App:Location')->getAllLocations();
+
         return $this->render('locations/index.html.twig', [
             'controller_name' => 'LocationsController',
+            'locations' => $locations,
         ]);
     }
 }

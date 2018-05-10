@@ -30,6 +30,11 @@ class Location
      * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="location", cascade={"persist", "remove"})
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LocationsCollection", inversedBy="locations")
+     */
+    private $locationsCollection;
     
 
     public function __construct()
@@ -83,5 +88,22 @@ class Location
         }
 
         return $this;
+    }
+
+    public function getLocationsCollection(): ?LocationsCollection
+    {
+        return $this->locationsCollection;
+    }
+
+    public function setLocationsCollection(?LocationsCollection $locationsCollection): self
+    {
+        $this->locationsCollection = $locationsCollection;
+
+        return $this;
+    }
+
+    public function __toString(): ?string
+    {
+        return $this->id;
     }
 }
