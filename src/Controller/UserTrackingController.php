@@ -28,8 +28,8 @@ class UserTrackingController extends Controller
             $latitude=$request->request->get('latitude');
             $longitude=$request->request->get('longitude');
 
-            $location->setLatitude($latitude);
-            $location->setLongitude($longitude);
+            $location->setLatitude((float)$latitude);
+            $location->setLongitude((float)$longitude);
 
 
             $manager = $this->getDoctrine()->getManager();
