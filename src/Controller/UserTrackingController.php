@@ -16,7 +16,7 @@ class UserTrackingController extends Controller
     /**
      * @Route("/track", name="user_tracking")
      */
-    public function index(Request $request)
+    public function singleUserLocation(Request $request)
     {
         $location=new Location();
         $form = $this->createFormBuilder()
@@ -46,8 +46,22 @@ class UserTrackingController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('user_tracking/index.html.twig',[
+        return $this->render('user_tracking/single_user_location.html.twig',[
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/heatmap", name="heatmap")
+     */
+    public function heatmap(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $locations = $manager->getRepository('App:Location')->getAllLocations();
+
+        return $this->render('user_tracking/heatmap.html.twig', [
+            'controller_name' => 'LocationsController',
+            'locations' => $locations,
         ]);
     }
 }
