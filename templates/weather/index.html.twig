@@ -49,7 +49,7 @@
     </style>
 {% endblock %}
 {% block body %}
-    {#<div class="ui equal width internally celled grid center aligned">
+    <div class="ui equal width internally celled grid">
         <div class="center aligned row">
             <div class="column">
                 <ul>
@@ -66,8 +66,26 @@
                 </ul>
             </div>
         </div>
-    </div>#}
-    <div class="main-container">
+    </div>
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>
+                    {% for item in viento %}
+                        <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul>
+                    {% for item in estado_cielo %}
+                        <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {#<div id="main-container">
         <table>
             <thead>
             <tr>
@@ -79,5 +97,5 @@
                 <td>Agua</td><td>Tusmuertos</td>
             </tr>
         </table>
-    </div>
+    </div>#}
 {% endblock %}
