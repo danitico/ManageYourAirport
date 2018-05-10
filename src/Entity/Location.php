@@ -22,14 +22,14 @@ class Location
     private $latitude;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", precision=5, scale=2)
      */
     private $longitude;
 
     public function __construct()
     {
-        $this->setLatitude(0);
-        $this->setLongitude(0);
+        $this->setLatitude(0.0);
+        $this->setLongitude(0.0);
     }
 
     public function getId()
