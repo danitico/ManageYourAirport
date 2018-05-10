@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    {#<title>{% block title %}Welcome!{% endblock %}</title>#}
     {% block stylesheets %}
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
-        {#<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">#}
+
     {% endblock %}
 </head>
 
 
-<body>
+
+<body onload="">
 
 {% block body %}
     <div class="ui fixed inverted menu">
@@ -38,18 +40,46 @@
 
 {% block javascripts %}
 
+    <script type="text/javascript">
+
+
+        function geoFindMe() {
+            var output = document.getElementById("out");
+
+            if (!navigator.geolocation){
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
+
+            function success(position) {
+
+
+                var latitude  = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+                var img = new Image();
+                img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+                output.appendChild(img);
+            }
+
+            function error() {
+                output.innerHTML = "Unable to retrieve your location";
+            }
+
+            output.innerHTML = "<p>Locating…</p>";
+
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+
+    </script>
 
 {% endblock %}
-{#
-{% block javascripts %}
-#}
-    {#
-    <script src="{{ asset('build/js/app.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-    #}
-{#
-{% endblock %}
-#}
+
+
 </body>
+
 </html>
