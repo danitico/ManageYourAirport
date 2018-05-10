@@ -3,4 +3,4 @@ easy_admin:
 #        # List the entity class name you want to manage
         - App\Entity\User
         - App\Entity\Location
-#        - App\Entity\User
+        - App\Entity\City
