@@ -22,7 +22,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return User[] Returns an array of User objects
      */
-    public function getUser()
+    public function getUser($va)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
