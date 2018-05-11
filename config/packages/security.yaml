@@ -38,3 +38,5 @@ security:
         #- { path: ^/homepage, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/userpage, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/track, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/heatmap, roles: [ROLE_ADMIN] }

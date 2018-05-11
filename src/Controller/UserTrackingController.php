@@ -16,7 +16,7 @@ class UserTrackingController extends Controller
     /**
      * @Route("/track", name="user_tracking")
      */
-    public function index(Request $request)
+    public function singleUserLocation(Request $request)
     {
         $location=new Location();
         $form = $this->createFormBuilder()
@@ -24,12 +24,13 @@ class UserTrackingController extends Controller
             ->add('longitude', HiddenType::class)
             ->getForm();
 
+        $manager = $this->getDoctrine()->getManager();
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $latitude=$request->request->get('latitude');
             $longitude=$request->request->get('longitude');
-
 
             $location->setLatitude((float)$latitude);
             $location->setLongitude((float)$longitude);
@@ -39,15 +40,34 @@ class UserTrackingController extends Controller
             $locationsCollection = $this->getDoctrine()->getRepository('App:LocationsCollection')->getCollection(1);
             $locationsCollection[0]->addLocation($location);
 
-            $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->persist($locationsCollection[0]);
             $manager->flush();
-            return $this->redirectToRoute('homepage');
+            sleep(1);
+            return $this->redirectToRoute('user_tracking');
         }
+        $location = array();
+        $location[] = $this->getUser()->getLocation();
+        //TODO dix this ^_^
 
-        return $this->render('user_tracking/index.html.twig',[
+        return $this->render('user_tracking/single_user_location.html.twig',[
             'form' => $form->createView(),
+            'locations' => $location,
+        ]);
+    }
+
+    /**
+     * @Route("/heatmap", name="heatmap")
+     */
+    public function heatmap(Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $locations = $manager->getRepository('App:Location')->getAllLocations();
+
+        return $this->render('user_tracking/heatmap.html.twig', [
+            'controller_name' => 'LocationsController',
+            'locations' => $locations,
         ]);
     }
 }

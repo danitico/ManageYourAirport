@@ -1,0 +1,234 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}tracking{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        #floating-panel {
+            background-color: #fff;
+            border: 1px solid #999;
+            left: 25%;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            z-index: 5;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    {% set latitude %}0{% endset %}
+    {% set longitude %}0{% endset %}
+
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <img class="logo" src="{{ asset('img/logo.png') }}">
+            <a href={{ path('user_page') }} class="item">Inicio</a>
+            <a href="{{ path('flights') }}" class="item">Vuelos</a>
+            <a href="{{ path('luggage') }}" class="item">Equipaje</a>
+            <a href={{ path('user_tracking') }} class="item">Mapa</a>
+            <div class="right menu">
+                <div class="item">
+                    {{ form_start(form) }}
+                    {{ form_row(form.longitude, {'value' : longitude }) }}
+                    {{ form_row(form.latitude,  {'value' : latitude  }) }}
+                        <input type="hidden" name="longitude" id="lon" value=5 />
+                        <input type="hidden" name="latitude"  id="lat" value=5 />
+                        <button onclick=submit class="ui inverted button">Update my location</button>
+                    {{ form_end(form) }}
+                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="item">
+                        <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
+                    <div class="item">
+                        <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{#
+    <div id="floating-panel">
+        {{ form_start(form) }}
+            {{ form_row(form.longitude, {'value' : longitude }) }}
+            {{ form_row(form.latitude,  {'value' : latitude  }) }}
+            <input type="hidden" name="longitude" id="lon" value=0 />
+            <input type="hidden" name="latitude"  id="lat" value=0 />
+            <button onclick=submit>Update my location</button>
+        {{ form_end(form) }}
+    </div>
+#}
+
+
+    {#<p><button onclick="geoFindMe()">Show my location</button></p>#}
+    {#triggers (part of) the location loading#}
+    <div id="out" hidden></div><div id="loc"></div>
+
+
+    <div id="map"></div>
+
+{#
+    <div id="floating-panel">
+        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <button onclick="changeGradient()">Change gradient</button>
+        <button onclick="changeRadius()">Change radius</button>
+        <button onclick="changeOpacity()">Change opacity</button>
+    </div>
+#}
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        function geoFindMe() {
+            var output = document.getElementById("out");
+
+            if (!navigator.geolocation){
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
+
+            function success(position) {
+                var latitude  = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                document.getElementById("lat").innerHTML = position.coords.latitude;
+                document.getElementById("lon").innerHTML = position.coords.longitude;
+
+                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+                var lat=document.getElementById("lat");
+                var lon=document.getElementById("lon");
+                lat.value=latitude;
+                lon.value=longitude;
+
+                var img = new Image();
+                img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+
+
+                output.appendChild(img);
+            }
+
+            function error() {
+                output.innerHTML = "Unable to retrieve your location";
+            }
+
+            output.innerHTML = "<p>Locating…</p>";
+
+            navigator.geolocation.getCurrentPosition(success, error);
+
+        }
+
+
+    </script>
+
+    <script>
+
+        // This example requires the Visualization library. Include the libraries=visualization
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
+
+        var map, heatmap;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16 ,
+                center: {lat:37.914513 , lng: -4.719203},
+                mapTypeId: 'satellite'
+            });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: getPoints(),
+                map: map
+            });
+        }
+
+        function toggleHeatmap() {
+            heatmap.setMap(heatmap.getMap() ? null : map);
+        }
+
+        function changeGradient() {
+            var gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)',
+            ]
+            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        }
+
+        function changeRadius() {
+            heatmap.set('radius', heatmap.get('radius') ? null : 20);
+        }
+
+        function changeOpacity() {
+            heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        }
+
+        // Heatmap data: Points
+        function getPoints() {
+            return [
+                {%  for location in locations %}
+                new google.maps.LatLng({{  location }}),
+                {% endfor %}
+
+            ];
+        }
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYYrMWQ5ILWdoR5PrGyP7CZWTW5Xi-2Cg&libraries=visualization&callback=initMap">
+    </script>
+
+    {#triggers (part of) the location loading#}
+    <script>
+        geoFindMe();
+    </script>
+
+
+{% endblock %}
