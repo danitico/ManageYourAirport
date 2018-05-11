@@ -53,8 +53,8 @@
         <div class="ui container">
             <img class="logo" src="{{ asset('img/logo.png') }}">
             <a href={{ path('user_page') }} class="item">Inicio</a>
-            <a href="" class="item">Vuelos</a>
-            <a href="" class="item">Pasajeros</a>
+            <a href="{{ path('flights') }}" class="item">Vuelos</a>
+            <a href="{{ path('luggage') }}" class="item">Equipaje</a>
             <a href={{ path('user_tracking') }} class="item">Mapa</a>
             <div class="right menu">
                 {% if is_granted('ROLE_ADMIN') %}
