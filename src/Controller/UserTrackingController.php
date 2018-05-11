@@ -43,6 +43,7 @@ class UserTrackingController extends Controller
             $manager->persist($user);
             $manager->persist($locationsCollection[0]);
             $manager->flush();
+            sleep(1);
             return $this->redirectToRoute('user_tracking');
         }
         $location = array();
