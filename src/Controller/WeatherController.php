@@ -113,16 +113,110 @@ class WeatherController extends Controller
         //echo "Probabilidad Precipitacion 00-06 -> " . $response1[0]['prediccion']['dia'][0]['probPrecipitacion'][1]['value'];
 
         //var_dump($response1);
+        date_default_timezone_set("Europe/Madrid");
+        $time=time();
+
+        if      ($time < strtotime('06:00:00')){
+            $timeindex=3;
+            $timeindextemperatura=0;
+        }elseif ($time < strtotime('12:00:00')){
+            $timeindex=4;
+            $timeindextemperatura=1;
+        }elseif ($time < strtotime('18:00:00')) {
+            $timeindex=5;
+            $timeindextemperatura=2;
+        }elseif ($time < strtotime('24:00:00')) {
+            $timeindex=6;
+            $timeindextemperatura=3;
+        }else{
+            $timeindex=3;
+            $timeindextemperatura=0;
+        }
 
 
+        $vientoAhora=$response1[0]['prediccion']['dia'][0]['viento'][$timeindex]['velocidad'];
+        $cieloAhora=$response1[0]['prediccion']['dia'][0]['estadoCielo'][$timeindex]['descripcion'];
+        $cotaNieveAhora=$response1[0]['prediccion']['dia'][0]['cotaNieveProv'][$timeindex]['value'];
+        $precipitacionAhora=$response1[0]['prediccion']['dia'][0]['probPrecipitacion'][$timeindex]['value'];
+        $temperaturaAhora=$response1[0]['prediccion']['dia'][0]['probPrecipitacion'][$timeindextemperatura]['value'];
+        if ($cotaNieveAhora==""){
+            $cotaNieveAhora='no aplicable';
+        }
+        if ($cieloAhora==""){
+        $cieloAhora='Soleado';
+        }
+
+
+        $vientoHoy=$response1[0]['prediccion']['dia'][0]['viento'][0]['velocidad'];
+        $cieloHoy=$response1[0]['prediccion']['dia'][0]['estadoCielo'][0]['descripcion'];
+        $cotaNieveHoy=$response1[0]['prediccion']['dia'][0]['cotaNieveProv'][0]['value'];
+        $precipitacionHoy=$response1[0]['prediccion']['dia'][0]['probPrecipitacion'][0]['value'];
+        $temperaturaMaximaHoy=$response1[0]['prediccion']['dia'][0]['temperatura']['maxima'];
+        $temperaturaMinimaHoy=$response1[0]['prediccion']['dia'][0]['temperatura']['minima'];
+        if ($cotaNieveHoy==""){
+            $cotaNieveHoy='no aplicable';
+        }
+        if ($cieloHoy=="") {
+            $cieloHoy = 'Soleado';
+        }
+
+
+        $vientoManana=$response1[0]['prediccion']['dia'][1]['viento'][0]['velocidad'];
+        $cieloManana=$response1[0]['prediccion']['dia'][1]['estadoCielo'][0]['descripcion'];
+        $cotaNieveManana=$response1[0]['prediccion']['dia'][1]['cotaNieveProv'][0]['value'];
+        $precipitacionManana=$response1[0]['prediccion']['dia'][1]['probPrecipitacion'][0]['value'];
+        $temperaturaMaximaManana=$response1[0]['prediccion']['dia'][1]['temperatura']['maxima'];
+        $temperaturaMinimaManana=$response1[0]['prediccion']['dia'][1]['temperatura']['minima'];
+        if ($cotaNieveManana==""){
+            $cotaNieveManana='no aplicable';
+        }
+        if ($cieloManana==""){
+            $cieloManana='Soleado';
+        }
+
+/*
+        dump($vientoAhora);
+        dump($cieloAhora);
+        dump($cotaNieveAhora);
+        dump($precipitacionAhora);
+        dump($temperaturaAhora);
+        dump($vientoHoy);
+        dump($cieloHoy);
+        dump($cotaNieveHoy);
+        dump($precipitacionHoy);
+        dump($temperaturaMaximaHoy);
+        dump($temperaturaMinimaHoy);
+        dump($vientoManana);
+        dump($cieloManana);
+        dump($cotaNieveManana);
+        dump($precipitacionManana);
+        dump($temperaturaMaximaManana);
+        dump($temperaturaMinimaManana);
+*/
 
 
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',
-            'viento' => $response1[0]['prediccion']['dia'][0]['viento'],
-            'estado_cielo' => $response1[0]['prediccion']['dia'][0]['estadoCielo'],
-            'cota de nieve' => $response1[0]['prediccion']['dia'][0]['cotaNieveProv'],
-            'precipitacion' => $response1[0]['prediccion']['dia'][0]['probPrecipitacion'],
+
+            'viento_ahora' => $vientoAhora,
+            'estado cielo ahora' => $cieloAhora,
+            'cota de nieve ahora' => $cotaNieveAhora,
+            'precipitacion ahora' => $precipitacionAhora,
+            'temperatura ahora' => $temperaturaAhora,
+
+            'viento_hoy' => $vientoHoy,
+            'estado cielo hoy' => $cieloHoy,
+            'cota de nieve hoy' => $cotaNieveHoy,
+            'precipitacion hoy' => $precipitacionHoy,
+            'temperatura maxima hoy' => $temperaturaMaximaHoy,
+            'temperatura minima hoy' => $temperaturaMinimaHoy,
+
+            'viento_manana' => $vientoManana,
+            'estado cielo manana' => $cieloManana,
+            'cota de nieve manana' => $cotaNieveManana,
+            'precipitacion manana' => $precipitacionManana,
+            'temperatura maxima manana' => $temperaturaMaximaManana,
+            'temperatura minima manana' => $temperaturaMinimaManana,
         ]);
     }
 }
