@@ -48,7 +48,6 @@ class UserTrackingController extends Controller
         }
         $location = array();
         $location[] = $this->getUser()->getLocation();
-        //TODO dix this ^_^
 
         return $this->render('user_tracking/single_user_location.html.twig',[
             'form' => $form->createView(),
@@ -62,7 +61,6 @@ class UserTrackingController extends Controller
     public function heatmap(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
         $locations = $manager->getRepository('App:Location')->getAllLocations();
 
         return $this->render('user_tracking/heatmap.html.twig', [
