@@ -24,7 +24,22 @@ class WatsonController extends Controller
         /*var_dump($pipo);*/
         /*.getenv('WORKSPACE').*/
 
-        $client = new Client();
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+
+
+        $response = $client->post('https://gateway.watsonplatform.net/assistant/api/v1/workspaces/dbf19c07-072f-4d5a-b45b-88cdc3d82bfe/message?version=2018-02-16',
+            [ 'body' => json_encode(
+                "{\"input\": { \"text\": \"Hola\" }}"
+            ),
+            'auth' => [getenv('USERNAME_WATSON'), getenv('PASSWORD')]
+
+            ]);
+
+        var_dump($response);
+
+
 
         /*$res = $client->post("https://gateway.watsonplatform.net/assistant/api/v1/workspaces/dbf19c07-072f-4d5a-b45b-88cdc3d82bfe/message?version=2018-02-16", [
             'body' => $pipo,
@@ -34,13 +49,13 @@ class WatsonController extends Controller
             ]
         ]);*/
 
-            $res = $client->request('PUT', "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/dbf19c07-072f-4d5a-b45b-88cdc3d82bfe/message?version=2018-02-16",[
+            /*$res = $client->request('PUT', "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/dbf19c07-072f-4d5a-b45b-88cdc3d82bfe/message?version=2018-02-16",[
                 'auth'=> [getenv('USERNAME_WATSON'), getenv('PASSWORD')],
                 'body' => $pipo,
                 'headers' => [
                     'Content-Type' => 'application/json',
                 ]
-            ]);
+            ]);*/
 
         /*var_dump($res);*/
 
