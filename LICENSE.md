@@ -1,6 +1,6 @@
 BSD 3-Clause License
 
-Copyright (c) 2018, Daniel Ranchal
+Copyright (c) 2018, Daniel Ranchal Parrado, Diego Rodríguez Riera
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
