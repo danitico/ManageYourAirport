@@ -1,31 +1,49 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}userpage{% endblock %}
+{% block title %}
+    userpage
+{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
-    <style type="text/css">
-        body {
-            background-color: #DADADA;
-        }
-        body > .grid {
-            height: 100%;
-        }
-        .image {
-            margin-top: -100px;
-        }
-        .column {
-            max-width: 450px;
-        }
-    </style>
+
+    {{ parent() }}
+
 {% endblock %}
 
 {% block body %}
 
-    {{ parent() }}
+    <div class="ui middle aligned center aligned grid">
+        <div class="row"></div>
+        <div class="row"></div>
 
-    <img src="https://www.w3schools.com/html/img_girl.jpg" alt="Girl in a jacket" width="500" height="600">
+            <div class="row">
+                hi, this is the user main page, pleasy fix this shitty ui
+            <div class="column">
+                <div class="item">
+                    <a href={{ path('user_tracking') }} class="ui button">Mapa</a>
+                </div>
+                <div class="item">
+                    <a href={{ path('luggage') }} class="ui button">Equipaje</a>
+                </div>
+                <div class="item">
+                    <a href={{ path('flights') }} class="ui button">Vuelos</a>
+                </div>
+                <div class="item">
+                    <a href={{ path('weather') }} class="ui button">Tiempo</a>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="item">
+                        <a href={{ path('heatmap') }} class="ui button">Heatmap</a>
+                    </div>
+                    <div class="item">
+                        <a href={{ path('admin') }} class="ui button">Administrar</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
