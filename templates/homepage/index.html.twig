@@ -140,6 +140,7 @@
                     </a>
                     <a href={{ path('homepage') }} class="active item">Home</a>
                     <a href={{ path('about_us') }} class="item">About us</a>
+                    <a href="{{ path('privacypolicy') }}" class="item">Privacy Policy</a>
                     <div class="right item">
                         <a href={{ path('login') }} class="ui button">Log in</a>
                         <a href={{ path('user_registration') }} class="ui button">Sign Up</a>
@@ -170,8 +171,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="center aligned column">
-                        <a class="ui huge button">Register Now</a>
+                    <div class="column center aligned">
+                        <a href="{{ path('user_registration') }}" class="ui huge button">Register Now</a>
                     </div>
                 </div>
             </div>

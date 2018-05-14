@@ -1,5 +1,6 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+
 {% endblock %}
 
 {% block container %}
@@ -7,6 +8,7 @@
         <div class="ui container">
             <a href={{ path('homepage') }} class="active item">Home</a>
             <a href={{ path('about_us') }} class="item">About us</a>
+            <a href="{{ path('privacypolicy') }}" class="item">Privacy Policy</a>
             <div class="right menu">
                 <div class="item">
                     <a href={{ path('login') }} class="ui button">Log in</a>
