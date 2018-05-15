@@ -60,62 +60,23 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
-        /*var_dump($response1);*/
+        /*$mensaje= "El usuario " . $user->getUsername() . " se ha registrado correctamente.";
+        $url="https://hooks.slack.com/services/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";
 
-        //echo $response1['0'];
-
-        /*echo "Probabilidad de precipitacion";
-        echo nl2br("\n");
-        foreach ($response1[0]['prediccion']['dia'][0]['probPrecipitacion'] as $values){
-            echo $values['periodo'] . " -> " . $values['value'];
-            echo nl2br("\n");
-        }
-
-        echo nl2br("\n");
-        echo "Cota de nieve";
-        echo nl2br("\n");
-        foreach ($response1[0]['prediccion']['dia'][0]['cotaNieveProv'] as $values){
-            echo $values['periodo'] . " -> ";
-            if($values['value'] === ""){
-                echo "Ninguna";
-            }
-            echo nl2br("\n");
-        }
-
-        echo nl2br("\n");
-        echo "Estado del cielo";
-        echo nl2br("\n");
-        foreach ($response1[0]['prediccion']['dia'][0]['estadoCielo'] as $values){
-            echo $values['periodo'] . " -> ";
-            if($values['descripcion'] === ""){
-                echo "Despejado";
-            }
-            else{
-                echo $values['descripcion'];
-            }
-            echo nl2br("\n");
-        }
-
-        echo nl2br("\n");
-        echo "Viento";
-        echo nl2br("\n");
-        foreach ($response1[0]['prediccion']['dia'][0]['viento'] as $values){
-            echo $values['periodo'] . " -> ";
-            if($values['velocidad'] !== 0){
-                echo $values['velocidad'] . " km/h dirección " . $values['direccion'];
-            }
-            else{
-                echo $values['velocidad'];
-            }
-            echo nl2br("\n");
-        }*/
-
-        //echo "Probabilidad Precipitacion 00-06 -> " . $response1[0]['prediccion']['dia'][0]['probPrecipitacion'][1]['value'];
-
-        //var_dump($response1);
-
-
-
+        $payload = json_encode(
+            array(
+                "channel" => "#general",
+                "username" => "newUsersBot",
+                "text" => $mensaje,
+            )
+        );
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_exec($ch);
+        curl_close($ch);*/
 
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',

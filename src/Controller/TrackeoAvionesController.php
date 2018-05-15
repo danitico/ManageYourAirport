@@ -14,7 +14,7 @@ class TrackeoAvionesController extends Controller
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://opensky-network.org/api/states/all?lamin=36.57858&lomin= -4.826488&lamax=36.905019&lomax= -4.331581",
+            CURLOPT_URL => "https://opensky-network.org/api/states/all?lamin=36.57858&lomin=-4.826488&lamax=36.905019&lomax=-4.331581",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
