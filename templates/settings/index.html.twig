@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.slackChannel ) }}
+        {{ form_row(form.webhookURL ) }}
+    {{ form_end(form) }}
+
+{% endblock %}
