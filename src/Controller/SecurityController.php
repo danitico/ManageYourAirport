@@ -83,10 +83,31 @@ class SecurityController extends Controller
 
             $user->eraseCredentials();
 
+            //commented out becouse of dev env
+            /*
+            $mensaje= "El usuario ".$user->getUsername()." se ha registrado";
+            $url="https://hooks.slack.com/services/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";
+
+            $payload = json_encode(
+                array(
+                    "channel" => "#general",
+                    "username" => "newUsersBot",
+                    "text" => $mensaje,
+                    "icon_emoji" => ":elephant:"
+                )
+            );
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+            curl_close($ch);
+            */
+
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('security/register.html.twig', [
+        return $this->render('security/register.html.twig',[
             'form' => $form->createView(),
         ]);
     }

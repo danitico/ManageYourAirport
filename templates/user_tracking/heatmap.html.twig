@@ -49,28 +49,7 @@
     {% set latitude %}0{% endset %}
     {% set longitude %}0{% endset %}
 
-    <div class="ui fixed inverted menu">
-        <div class="ui container">
-            <img class="logo" src="{{ asset('img/logo.png') }}">
-            <a href={{ path('user_page') }} class="item">Inicio</a>
-            <a href="{{ path('flights') }}" class="item">Vuelos</a>
-            <a href="{{ path('luggage') }}" class="item">Equipaje</a>
-            <a href={{ path('user_tracking') }} class="item">Mapa</a>
-            <div class="right menu">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div class="item">
-                        <a href={{ path('admin') }} class="ui inverted button">Administrar</a>
-                    </div>
-                {% endif %}
-                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
-                    <div class="item">
-                        <a href={{ path('logout') }} class="ui inverted button">Cerrar sesión</a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
+    {{ parent() }}
     {#
     <div id="floating-panel">
         <button onclick="toggleHeatmap()">Toggle Heatmap</button>

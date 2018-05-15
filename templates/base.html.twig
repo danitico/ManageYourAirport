@@ -8,6 +8,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
 
     {% endblock %}
+    <title>
+        {% block title %}
+            undefined title
+        {% endblock%}
+    </title>
+
 </head>
 
 
@@ -17,7 +23,9 @@
 {% block body %}
     <div class="ui fixed inverted menu">
         <div class="ui container">
-            <img class="logo" src="{{ asset('img/logo.png') }}">
+            <a href="{{ path('homepage') }}">
+                <img class="logo" src="{{ asset('img/logo.png') }}">
+            </a>
             <a href={{ path('user_page') }} class="item">Inicio</a>
             <a href="{{ path('flights') }}" class="item">Vuelos</a>
             <a href="{{ path('luggage') }}" class="item">Equipaje</a>
