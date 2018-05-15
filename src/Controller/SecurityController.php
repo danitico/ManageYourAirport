@@ -64,6 +64,7 @@ class SecurityController extends Controller
             $entityManager->flush();
 
             //erases the plain password
+
             $user->eraseCredentials();
 
             //gets the settings from the datbase
