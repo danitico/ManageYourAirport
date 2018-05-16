@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Watson;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +39,13 @@ class SecurityController extends Controller
      * @Route("/logout", name="logout")
      */
     public function logout(){
+        $manager=$this->getDoctrine()->getManager();
+        $chats=$manager->getRepository('App:Watson')->findAll();
+
+        foreach ($chats as $chat){
+            $manager->remove($chat);
+        }
+
         return $this->redirectToRoute('login');
     }
 
