@@ -12,8 +12,10 @@ class LuggageController extends Controller
      */
     public function lost_luggage()
     {
-        return $this->render('luggage/lost_luggage.html.twig', [
+        $luggages=$this->getDoctrine()->getRepository('App:Luggage')->getLostLuggage();
+        return $this->render('luggage/all_luggage.html.twig', [
             'controller_name' => 'LuggageController',
+            'luggages' => $luggages,
         ]);
     }
 
@@ -23,8 +25,10 @@ class LuggageController extends Controller
      */
     public function all_luggage()
     {
+        $luggages=$this->getDoctrine()->getRepository('App:Luggage')->getAllLuggage();
         return $this->render('luggage/all_luggage.html.twig', [
             'controller_name' => 'LuggageController',
+            'luggages' => $luggages,
         ]);
     }
 }
