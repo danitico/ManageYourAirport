@@ -16,6 +16,7 @@ class WatsonController extends Controller
      */
     public function index(Request $request)
     {
+
         $manager=$this->getDoctrine()->getManager();
         $Watson=new Watson();
         $form=$this->createFormBuilder($Watson)

@@ -1,5 +1,5 @@
 # ManageYourAirport
-Manage your airport is a fast yet easy way of controlloing your airpot.  
+Manage your airport is a fast yet easy way of controlling your airport.  
 Our Software includes:
 - Planes, Luggage, and User tracking (following all privacy concern laws.).
 
