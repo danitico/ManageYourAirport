@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TrackeoAvionesController extends Controller
 {
     /**
-     * @Route("/trackeo/aviones", name="trackeo_aviones")
+     * @Route("/trackeo_aviones", name="trackeo_aviones")
      */
     public function index()
     {

@@ -40,3 +40,8 @@ security:
         - { path: ^/userpage, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/track, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/heatmap, roles: [ROLE_ADMIN] }
+        - { path: ^/passanger, roles: [ROLE_ADMIN] }
+        - { path: ^/weather, roles: [ROLE_ADMIN] }
+        - { path: ^/watson, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/trackeo_aviones, roles: [ROLE_ADMIN] }
+        - { path: ^/settings, roles: [ROLE_ADMIN]}
