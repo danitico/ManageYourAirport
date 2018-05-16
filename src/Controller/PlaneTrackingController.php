@@ -5,10 +5,10 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class TrackeoAvionesController extends Controller
+class PlaneTrackingController extends Controller
 {
     /**
-     * @Route("/trackeo/aviones", name="trackeo_aviones")
+     * @Route("/plane_tracking", name="plane tracking")
      */
     public function index()
     {
@@ -32,8 +32,8 @@ class TrackeoAvionesController extends Controller
 
         $datos = json_decode($response, true);
 
-        return $this->render('trackeo_aviones/index.html.twig', [
-             'controller_name' => 'TrackeoAvionesController',
+        return $this->render('plane_tracking/index.html.twig', [
+             'controller_name' => 'PlaneTrackingController',
         ]);
     }
 }
