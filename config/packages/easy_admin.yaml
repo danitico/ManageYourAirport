@@ -6,3 +6,4 @@ easy_admin:
         - App\Entity\City
         - App\Entity\LocationsCollection
         - App\Entity\Settings
+        - App\Entity\Luggage
