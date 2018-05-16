@@ -15,7 +15,7 @@ class WatsonController extends Controller
     public function index()
     {
         /*$pipo = '{"input": {"text": "Hello"}}';*/
-        $pipo = array("input" => array("text" => "Hello"));
+        $pipo = array("input" => array("text" => "Hola"));
         $pipo = json_encode($pipo);
 
         /*var_dump($res);*/

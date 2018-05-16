@@ -5,3 +5,4 @@ easy_admin:
         - App\Entity\Location
         - App\Entity\City
         - App\Entity\LocationsCollection
+        - App\Entity\Settings
