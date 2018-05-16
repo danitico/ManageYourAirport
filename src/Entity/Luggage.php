@@ -26,6 +26,11 @@ class Luggage
      */
     private $isLost;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $airlineId;
+
     public function getId()
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Luggage
     public function setIsLost(bool $isLost): self
     {
         $this->isLost = $isLost;
+
+        return $this;
+    }
+
+    public function getAirlineId(): ?int
+    {
+        return $this->airlineId;
+    }
+
+    public function setAirlineId(int $airlineId): self
+    {
+        $this->airlineId = $airlineId;
 
         return $this;
     }

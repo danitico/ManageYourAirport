@@ -57,8 +57,6 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
-        //TODO FIX THIS
-
 
         date_default_timezone_set("Europe/Madrid");
         $time=time();
