@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>
+                    {{ form_start(form) }}
+                        {{ form_row(form.airlineId) }}
+                    {{ form_end(form) }}
+                </ul>
+        {{ header }}
+        {% for luggage in luggages %}
+            <div>id : {{ luggage.airlineId }}</div>
+        {% endfor %}
+        -</div>
+    </div>
+
+{% endblock %}

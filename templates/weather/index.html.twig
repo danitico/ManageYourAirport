@@ -50,6 +50,8 @@
 {% endblock %}
 {% block body %}
 
+    {{ parent() }}
+
 {#
     <div class="ui equal width internally celled grid">
         <div class="center aligned row">
@@ -91,6 +93,7 @@
 
 
     <div class="ui equal width internally celled grid">
+        <div></div>
         <div class="center aligned row">
             <div class="column">
                 <ul>Ahora</ul>
