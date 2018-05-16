@@ -57,6 +57,8 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
+        //TODO FIX THIS
+
 
         $mensaje= "El usuario " . $user->getUsername() . " se ha registrado correctamente.";
         $url="https://hooks.slack.com/services/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";

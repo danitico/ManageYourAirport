@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class UserTrackingController extends Controller
 {
     /**
-     * @Route("/track", name="user_tracking")
+     * @Route("/map", name="user_tracking")
      */
     public function singleUserLocation(Request $request)
     {
@@ -56,7 +56,7 @@ class UserTrackingController extends Controller
     }
 
     /**
-     * @Route("/heatmap", name="heatmap")
+     * @Route("/map/heatmap", name="heatmap")
      */
     public function heatmap(Request $request)
     {

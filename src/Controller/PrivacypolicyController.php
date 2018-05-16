@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class PrivacypolicyController extends Controller
 {
     /**
-     * @Route("/privacypolicy", name="privacypolicy")
+     * @Route("/privacy", name="privacypolicy")
      */
     public function index()
     {
