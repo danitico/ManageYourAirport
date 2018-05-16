@@ -22,9 +22,14 @@ class Watson
     private $send;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", length=255, nullable=true)
      */
     private $received;
+
+    public function __construct()
+    {
+        $this->received = array();
+    }
 
     public function getId()
     {
@@ -43,12 +48,12 @@ class Watson
         return $this;
     }
 
-    public function getReceived(): ?string
+    public function getReceived(): ?array
     {
         return $this->received;
     }
 
-    public function setReceived(string $received): self
+    public function setReceived(array $received): self
     {
         $this->received = $received;
 

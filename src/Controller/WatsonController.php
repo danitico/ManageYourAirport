@@ -49,7 +49,7 @@ class WatsonController extends Controller
             curl_close($curl);
 
             $response = json_decode($response, true);
-            $Watson->setReceived($response['output']['text'][0]);
+            $Watson->setReceived($response['output']['text']);
 
             //persist the changes in the database
             $manager->persist($Watson);

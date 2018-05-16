@@ -33,7 +33,9 @@
             <div id="conversaciones">
                 {% for mensaje in mensajes %}
                     <b>{{ "Tú: " }}</b> {{ mensaje.send }} <br>
-                    <b>{{ "Watson: " }}</b> {{ mensaje.received }} <br>
+                    {% for recibido in mensaje.received %}
+                        <b>{{ "Watson: " }}</b> {{ recibido }} <br>
+                    {% endfor %}
                 {% endfor %}
             </div>
             <div style="text-align: center">
