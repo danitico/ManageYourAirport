@@ -58,24 +58,6 @@ class WeatherController extends Controller
         $response1 = json_decode($response1, true);
 
 
-        $mensaje= "El usuario " . $user->getUsername() . " se ha registrado correctamente.";
-        $url="https://hooks.slack.com/services/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";
-
-        $payload = json_encode(
-            array(
-                "channel" => "#general",
-                "username" => "newUsersBot",
-                "text" => $mensaje,
-            )
-        );
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-        curl_close($ch);
-
         date_default_timezone_set("Europe/Madrid");
         $time=time();
 
