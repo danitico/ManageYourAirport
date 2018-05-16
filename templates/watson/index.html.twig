@@ -1,22 +1,47 @@
-{#
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}
+    Asistente Virtual
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
+    <style>
+    #contenedor{
+        margin-top: 73px;
+/*        margin: auto;*/
+        max-width: 800px;
+        max-height: 800px;
+        margin-left: 275px;
+    }
+
+    #conversaciones{
+        height:200px;
+        margin-bottom: 10px;
+        border:1px solid #CCC;
+        overflow-y: scroll;
+        position: relative;
+
+    }
+    </style>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/WatsonController.php'|file_link(0) }}">src/Controller/WatsonController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/watson/index.html.twig'|file_link(0) }}">templates/watson/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {{ parent() }}
+    <div style="background-image: url('img/white_logo.png')">
+        <div id="contenedor" style="background-color: #DADADA;">
+            <h3 style="text-align: center">Chat con Manage Your Airport</h3>
+            <div id="conversaciones">
+                {% for mensaje in mensajes %}
+                    <b>{{ "Tú: " }}</b> {{ mensaje.send }} <br>
+                    <b>{{ "Watson: " }}</b> {{ mensaje.received }} <br>
+                {% endfor %}
+            </div>
+            <div style="text-align: center">
+                {{ form_start(form) }}
+                    {{ form_row(form.send) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
-#}

@@ -6,14 +6,12 @@
 {% endblock %}
 
 {% block stylesheets %}
-
-    {{ parent() }}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
 {% endblock %}
 
 {% block body %}
-
-    <div class="ui middle aligned center aligned grid">
+    {{ parent() }}
+    {#<div class="ui middle aligned center aligned grid">
         <div class="row"></div>
         <div class="row"></div>
 
@@ -44,6 +42,6 @@
             </div>
         </div>
     </div>
-
+#}
 
 {% endblock %}
