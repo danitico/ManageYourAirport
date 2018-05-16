@@ -49,18 +49,20 @@
     </style>
 {% endblock %}
 {% block body %}
+
+{#
     <div class="ui equal width internally celled grid">
         <div class="center aligned row">
             <div class="column">
                 <ul>
-                    {% for item in viento %}
+                    {% for item in viento_ahora %}
                         <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="column">
                 <ul>
-                    {% for item in estado_cielo %}
+                    {% for item in estado_cielo_ahora %}
                         <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
                     {% endfor %}
                 </ul>
@@ -71,20 +73,54 @@
         <div class="center aligned row">
             <div class="column">
                 <ul>
-                    {% for item in viento %}
+                    {% for item in viento_hoy %}
                         <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="column">
                 <ul>
-                    {% for item in estado_cielo %}
+                    {% for item in estado_cielo_ahora %}
                         <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
+#}
+
+
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>Ahora</ul>
+                <ul>cielo: {{ estado_cielo_ahora }}</ul>
+                <ul>viento: {{ viento_ahora }}</ul>
+                <ul>precipitacion: {{ precipitacion_ahora }}</ul>
+                <ul>cota de nieve: {{ cota_de_nieve_ahora }}</ul>
+                <ul>temperatura: {{ temperatura_ahora }}</ul>
+            </div>
+            <div class="column">
+                <ul>Hoy</ul>
+                <ul>cielo: {{ estado_cielo_hoy }}</ul>
+                <ul>viento medio: {{ viento_hoy }}</ul>
+                <ul>precipitacion: {{ precipitacion_hoy }}</ul>
+                <ul>cota de nieve: {{ cota_de_nieve_hoy }}</ul>
+                <ul>temperatura maxima: {{ temperatura_maxima_hoy }}</ul>
+                <ul>temperatura minima: {{ temperatura_minima_hoy }}</ul>
+            </div>
+            <div class="column">
+                <ul>Mañana</ul>
+                <ul>cielo: {{ estado_cielo_manana }}</ul>
+                <ul>viento medio: {{ viento_manana }}</ul>
+                <ul>precipitacion: {{ precipitacion_manana }}</ul>
+                <ul>cota de nieve: {{ cota_de_nieve_manana }}</ul>
+                <ul>temperatura maxima: {{ temperatura_maxima_manana }}</ul>
+                <ul>temperatura minima: {{ temperatura_minima_manana }}</ul>
+            </div>
+        </div>
+    </div>
+
     {#<div id="main-container">
         <table>
             <thead>

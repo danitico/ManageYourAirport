@@ -145,24 +145,24 @@ class WeatherController extends Controller
             'controller_name' => 'WeatherController',
 
             'viento_ahora' => $vientoAhora,
-            'estado cielo ahora' => $cieloAhora,
-            'cota de nieve ahora' => $cotaNieveAhora,
-            'precipitacion ahora' => $precipitacionAhora,
-            'temperatura ahora' => $temperaturaAhora,
+            'estado_cielo_ahora' => $cieloAhora,
+            'cota_de_nieve_ahora' => $cotaNieveAhora,
+            'precipitacion_ahora' => $precipitacionAhora,
+            'temperatura_ahora' => $temperaturaAhora,
 
             'viento_hoy' => $vientoHoy,
-            'estado cielo hoy' => $cieloHoy,
-            'cota de nieve hoy' => $cotaNieveHoy,
-            'precipitacion hoy' => $precipitacionHoy,
-            'temperatura maxima hoy' => $temperaturaMaximaHoy,
-            'temperatura minima hoy' => $temperaturaMinimaHoy,
+            'estado_cielo_hoy' => $cieloHoy,
+            'cota_de_nieve_hoy' => $cotaNieveHoy,
+            'precipitacion_hoy' => $precipitacionHoy,
+            'temperatura_maxima_hoy' => $temperaturaMaximaHoy,
+            'temperatura_minima_hoy' => $temperaturaMinimaHoy,
 
             'viento_manana' => $vientoManana,
-            'estado cielo manana' => $cieloManana,
-            'cota de nieve manana' => $cotaNieveManana,
-            'precipitacion manana' => $precipitacionManana,
-            'temperatura maxima manana' => $temperaturaMaximaManana,
-            'temperatura minima manana' => $temperaturaMinimaManana,
+            'estado_cielo_manana' => $cieloManana,
+            'cota_de_nieve_manana' => $cotaNieveManana,
+            'precipitacion_manana' => $precipitacionManana,
+            'temperatura_maxima_manana' => $temperaturaMaximaManana,
+            'temperatura_minima_manana' => $temperaturaMinimaManana,
         ]);
     }
 }
