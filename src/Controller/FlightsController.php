@@ -10,7 +10,7 @@ class FlightsController extends Controller
     /**
      * @Route("/flights", name="flights")
      */
-    public function index()
+    public function flights()
     {
         return $this->render('flights/flights.html.twig', [
             'controller_name' => 'FlightsController',

@@ -27,11 +27,22 @@
                     <a href={{ path('luggage') }} class="ui button">Equipaje</a>
                 </div>
                 <div class="item">
+                    <a href={{ path('lost luggage') }} class="ui button">Equipaje perdido</a>
+                </div>
+                <div class="item">
                     <a href={{ path('flights') }} class="ui button">Vuelos</a>
+                </div>
+                <div class="item">
+                    <a href={{ path('flights tracking') }} class="ui button">mapa de aviones</a>
                 </div>
                 <div class="item">
                     <a href={{ path('weather') }} class="ui button">Tiempo</a>
                 </div>
+                <div class="item">
+                    <a href={{ path('watson') }} class="ui button">watson</a>
+                </div>
+
+
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="item">
