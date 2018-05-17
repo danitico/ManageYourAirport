@@ -11,10 +11,47 @@
 
 {% block body %}
 
-    Maletas
+    {{ parent() }}
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <ul></ul>{#for filling the gap#}
+            </div>
+        </div>
+    </div>
 
-    {% for luggage in luggages %}
-        <div>id : {{ luggage.airlineId }}</div>
-    {% endfor %}
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <ul>{{ header }}</ul>
+            </div>
+        </div>
+    </div>
+    <div class="ui equal width internally celled grid">
+        <div class="center aligned row">
+
+            <div class="column">
+                <ul>ID</ul>
+                {% for luggage in luggages %}
+                    <ul>{{ luggage.airlineId }}</ul>
+                {% endfor %}
+            </div>
+
+            <div class="column">
+                <ul>Propieratio</ul>
+                {% for luggage in luggages %}
+                    <ul>{% if luggage.owner %}{{ luggage.owner }}{% else %}Sin propieratio{% endif %}</ul>
+                {% endfor %}
+            </div>
+
+            <div class="column">
+                <ul>Estado</ul>
+                {% for luggage in luggages %}
+                    <ul>{% if luggage.isLost==1 %}Perdida{% else %}Localizada{% endif %}</ul>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
 
 {% endblock %}

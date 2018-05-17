@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Luggage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,9 @@ class LuggageType extends AbstractType
     {
         $builder
             ->add('isLost', HiddenType::class)
-            ->add('airlineId')
+            ->add('airlineId', NumberType::class,[
+                'label' => 'Numero de identificación ',
+            ])
             ->add('Owner', HiddenType::class)
         ;
     }
