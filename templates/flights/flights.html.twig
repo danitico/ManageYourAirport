@@ -2,20 +2,57 @@
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
+{% block stylesheets %}
+
+    {{ parent() }}
+    <style>
+        #main-container{
+            margin: 150px auto;
+            width: 600px;
+        }
+        table{
+            background-color: lightgrey;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td{
+            padding: 20px;
+        }
+
+        thead{
+            background-color: #246355;
+            border-bottom: solid 5px #0F362D;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background-color: #ddd;
+        }
+
+        tr:hover{
+            background-color: #369681;
+            color: white
+        }
+    </style>
+
+
+{% endblock %}
+
+
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {{ parent() }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/FlightsController.php'|file_link(0) }}">src/Controller/FlightsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/flights/flights.html.twig'|file_link(0) }}">templates/flights/flights.html.twig</a></code></li>
-        <li>brief, here a list of all planes will be showed</li>
-    </ul>
-</div>
+    <div class="main-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ICAO</th><th>Tiempo de aterrizaje estimado</th><th>Aeropuerto Origen</th><th>Aeropuerto Destino</th></tr>
+            </thead>
+        </table>
+    </div>
+
 {% endblock %}
