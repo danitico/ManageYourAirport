@@ -11,11 +11,11 @@
             width: 600px;
         }
         table{
-            background-color: lightgrey;
+            background-color: white;
             text-align: left;
             border-collapse: collapse;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 70px;
         }
 
         th, td{
@@ -23,13 +23,13 @@
         }
 
         thead{
-            background-color: #246355;
+            background-color: #001f3f;
             border-bottom: solid 5px #0F362D;
             color: white;
         }
 
         tr:nth-child(even){
-            background-color: #ddd;
+            background-color: #00a65a;
         }
 
         tr:hover{
@@ -41,7 +41,6 @@
 
 {% endblock %}
 
-
 {% block body %}
 
     {{ parent() }}
@@ -49,8 +48,10 @@
     <div class="main-container">
         <table>
             <thead>
-            <tr>
-                <th>ICAO</th><th>Tiempo de aterrizaje estimado</th><th>Aeropuerto Origen</th><th>Aeropuerto Destino</th></tr>
+                <tr><th>ICAO</th><th>Tiempo de aterrizaje estimado</th><th>Aeropuerto Origen</th><th>Aeropuerto Destino</th></tr>
+                {% for flight in flights %}
+                    <tr><th>{{ flight[0] }}</th><th>{{ flight[1] }}</th><th>{{ flight[2] }}</th><th>{{ flight[3] }}</th></tr>
+                {% endfor %}
             </thead>
         </table>
     </div>

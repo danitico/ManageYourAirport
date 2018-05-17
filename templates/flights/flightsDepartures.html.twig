@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ header }}{% endblock %}
+{% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block stylesheets %}
 
@@ -23,13 +23,13 @@
         }
 
         thead{
-            background-color: #246355;
+            background-color: #001f3f;
             border-bottom: solid 5px #0F362D;
             color: white;
         }
 
         tr:nth-child(even){
-            background-color: #dddd;
+            background-color: #00a65a;
         }
 
         tr:hover{
@@ -48,19 +48,11 @@
     <div class="main-container">
         <table>
             <thead>
-            <tr>
-                <th>ID</th><th>Propietario</th><th>Estado</th>
-            </tr>
-            </thead>
-            {% if luggages %}
-                {% for luggage in luggages %}
-                    <tr>
-                        <td>{{ luggage.airlineId }}</td><td>{% if luggage.owner %}{{ luggage.owner }}{% else %}Sin propieratio{% endif %}</td><td>{% if luggage.isLost==1 %}Perdida{% else %}Localizada{% endif %}</td>
-                    </tr>
+                <tr><th>ICAO</th><th>Tiempo de despegue estimado</th><th>Aeropuerto Origen</th><th>Aeropuerto Destino</th></tr>
+                {% for flight in flights %}
+                    <tr><th>{{ flight[0] }}</th><th>{{ flight[1] }}</th><th>{{ flight[2] }}</th><th>{{ flight[3] }}</th></tr>
                 {% endfor %}
-            {% else %}
-                <td>----</td><td>----</td><td>----</td>
-            {% endif %}
+            </thead>
         </table>
     </div>
 
