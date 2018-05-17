@@ -16,6 +16,7 @@
             text-align: left;
             border-collapse: collapse;
             width: 100%;
+            margin-top: 70px;
         }
 
         th, td{
@@ -41,7 +42,6 @@
 {% block body %}
 
     {{ parent() }}
-
 
     {% if failed==true %}
         <div class="ui equal width grid">
@@ -70,6 +70,7 @@
                 <tr>
                     <td style="background-color: #246355; color: white">Velocidad media viento</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_manana }} km/h</td>
                 </tr>
+
                 <tr>
                     <td style="background-color: #246355; color: white">Probabilidad de Precipitacion</td><td>{{ precipitacion_ahora }}%</td><td>{{ precipitacion_hoy }}%</td><td>{{ precipitacion_manana }}%</td>
                 </tr>
@@ -88,4 +89,5 @@
             </table>
         </div>
     {% endif %}
+
 {% endblock %}
