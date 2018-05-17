@@ -18,15 +18,28 @@ class FlightsController extends Controller
     }
 
     /**
-     * @Route("/flights/track", name="flights tracking")
+     * @Route("/flights/track/incomming", name="flights tracking incomming")
      */
-    public function tracking()
+    public function tracking_outcomming()
     {
+
+    }
+    /**
+     * @Route("/flights/track/outcomming", name="flights tracking outcomming")
+     */
+    public function tracking_incomming()
+    {
+        $time_start=time()-$this->getDoctrine()->getRepository('App:Settings')->getSettings()->getFlightsWindowsTime();
+        $time_end=time();
+        $url="https://".getenv('USERNAME_OPENSKY') . ":" . getenv('PASSWORD_OPENSKY')."@opensky-network.org/api/flights/departure?airport=LEMD&begin=".$time_start."&end=".$time_end."";
+
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://opensky-network.org/api/states/all?lamin=36.57858&lomin=-4.826488&lamax=36.905019&lomax=-4.331581",
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
+            CURLOPT_USERPWD => getenv('USERNAME_OPENSKY') . ":" . getenv('PASSWORD_OPENSKY'),
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -41,6 +54,9 @@ class FlightsController extends Controller
         curl_close($curl);
 
         $datos = json_decode($response, true);
+
+
+        dump($datos);
 
         return $this->render('flights/flights_tracking.html.twig', [
             'controller_name' => 'FlightsController',

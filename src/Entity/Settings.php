@@ -26,6 +26,11 @@ class Settings
      */
     private $webhookURL;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $flightsWindowsTime;
+
     public function getId()
     {
         return $this->id;
@@ -62,7 +67,6 @@ class Settings
                 "channel" => $this->getSlackChannel(),
                 "username" => "newUsersBot",
                 "text" => $message,
-                "icon_emoji" => ":elephant:"
             )
         );
 
@@ -74,6 +78,18 @@ class Settings
 
         $result = curl_exec($ch);
         curl_close($ch);
+
+        return $this;
+    }
+
+    public function getFlightsWindowsTime(): ?int
+    {
+        return $this->flightsWindowsTime;
+    }
+
+    public function setFlightsWindowsTime(int $flightsWindowsTime): self
+    {
+        $this->flightsWindowsTime = $flightsWindowsTime;
 
         return $this;
     }
