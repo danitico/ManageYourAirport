@@ -67,6 +67,27 @@
             </div>
         </div>
 
+        <div class="main-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>       </th><th>Ahora</th><th>Hoy</th><th>Mañana</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td style="background-color: #246355">hola</td><td>hola</td><td>hola</td><td>hola</td>
+                </tr>
+                <tr>
+                    <th>cielo</th><th>{{ estado_cielo_ahora }}</th><th>{{ estado_cielo_hoy }}</th><th>{{ estado_cielo_manana }}</th>
+                    <th>Velocidad media viento</th><th>{{ viento_ahora }}</th><th>{{ viento_ahora }}</th><th>{{ viento_manana }}</th>
+                    <th>Precipitacion</th><th>{{ precipitacion_ahora }}</th><th>{{ precipitacion_hoy }}</th><th>{{ precipitacion_manana }}</th>
+                    <th>Cota de nieve</th><th>{{ cota_de_nieve_ahora }}</th><th>{{ cota_de_nieve_hoy }}</th><th>{{ cota_de_nieve_manana }}</th>
+                    <th>Tº Mínima</th><th>       </th><th>{{ temperatura_minima_hoy }}</th><th>{{ temperatura_minima_manana }}</th>
+                    <th>Tº máxima</th><th>       </th><th>{{ temperatura_maxima_hoy }}</th><th>{{ temperatura_maxima_manana }}</th>
+                </tr>
+            </table>
+        </div>
+
     {% else %}
 
         <div class="main-container">
@@ -122,6 +143,7 @@
 
             </table>
         </div>
+
 
     {% endif %}
 
