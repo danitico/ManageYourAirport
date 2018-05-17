@@ -20,17 +20,15 @@ class LocationsCollectionRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return LocationsCollection[] Returns an array of LocationsCollection objects
+     * @return LocationsCollection
      */
-    public function getCollection($value)
+    public function getCollection()
     {
         $querry = $this->createQueryBuilder('l')
-            ->andWhere('l.id = :val')
-            ->setParameter('val', $value)
             ->orderBy('l.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery();
-        return $querry->execute();
+        return $querry->execute()[0];
     }
 
 //    /**
