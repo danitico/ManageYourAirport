@@ -15,12 +15,7 @@ class Luggage
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="luggage", cascade={"persist", "remove"})
-     */
-    private $Owner;
-
+    
     /**
      * @ORM\Column(type="boolean")
      */
@@ -31,22 +26,21 @@ class Luggage
      */
     private $airlineId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="luggage")
+     */
+    private $owner;
+
+    public function __toString()
+    {
+        return (string) $this->getAirlineId();
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function getOwner(): ?User
-    {
-        return $this->Owner;
-    }
-
-    public function setOwner(?User $Owner): self
-    {
-        $this->Owner = $Owner;
-
-        return $this;
-    }
 
     public function getIsLost(): ?bool
     {
@@ -68,6 +62,18 @@ class Luggage
     public function setAirlineId(int $airlineId): self
     {
         $this->airlineId = $airlineId;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

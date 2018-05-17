@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -61,13 +63,18 @@ class User implements UserInterface
     private $location;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Luggage", mappedBy="Owner", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Luggage", mappedBy="owner")
      */
     private $luggage;
 
-
     public function __construct()
     {
+        $this->luggage = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
     }
 
     /**
@@ -194,19 +201,32 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLuggage(): ?Luggage
+    /**
+     * @return Collection|Luggage[]
+     */
+    public function getLuggage(): Collection
     {
         return $this->luggage;
     }
 
-    public function setLuggage(?Luggage $luggage): self
+    public function addLuggage(Luggage $luggage): self
     {
-        $this->luggage = $luggage;
+        if (!$this->luggage->contains($luggage)) {
+            $this->luggage[] = $luggage;
+            $luggage->setOwner($this);
+        }
 
-        // set (or unset) the owning side of the relation if necessary
-        $newOwner = $luggage === null ? null : $this;
-        if ($newOwner !== $luggage->getOwner()) {
-            $luggage->setOwner($newOwner);
+        return $this;
+    }
+
+    public function removeLuggage(Luggage $luggage): self
+    {
+        if ($this->luggage->contains($luggage)) {
+            $this->luggage->removeElement($luggage);
+            // set the owning side to null (unless already changed)
+            if ($luggage->getOwner() === $this) {
+                $luggage->setOwner(null);
+            }
         }
 
         return $this;

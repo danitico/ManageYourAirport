@@ -45,7 +45,22 @@ class LuggageRepository extends ServiceEntityRepository
             ->orderBy('l.id', 'DESC')
             ->getQuery()
             ->getResult()
-            ;
+        ;
+    }
+
+    /**
+     * @return Luggage[] Returns an array of lost luggages
+     */
+
+    public function findById($id)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.airlineId = :val')
+            ->setParameter('val', $id)
+            ->orderBy('l.airlineId', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 }
