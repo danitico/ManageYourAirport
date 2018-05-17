@@ -57,7 +57,6 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
-
         date_default_timezone_set("Europe/Madrid");
         $time=time();
 
@@ -121,32 +120,9 @@ class WeatherController extends Controller
 
         $failed = ($precipitacionAhora=="")&&($precipitacionHoy=="")&&($precipitacionManana=="");
 
-/*
-        dump($vientoAhora);
-        dump($cieloAhora);
-        dump($cotaNieveAhora);
-        dump($precipitacionAhora);
-        dump($temperaturaAhora);
-        dump($vientoHoy);
-        dump($cieloHoy);
-        dump($cotaNieveHoy);
-        dump($precipitacionHoy);
-        dump($temperaturaMaximaHoy);
-        dump($temperaturaMinimaHoy);
-        dump($vientoManana);
-        dump($cieloManana);
-        dump($cotaNieveManana);
-        dump($precipitacionManana);
-        dump($temperaturaMaximaManana);
-        dump($temperaturaMinimaManana);
-*/
-
-
-
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',
-
-            'failed' => true,
+            'failed' => $failed,
 
             'viento_ahora' => $vientoAhora,
             'estado_cielo_ahora' => $cieloAhora,

@@ -8,18 +8,8 @@
         body {
             background-color: #DADADA;
         }
-        body > .grid {
-            height: 100%;
-        }
-        .image {
-            margin-top: -100px;
-        }
         .column {
             max-width: 450px;
-        }
-        main-container{
-            margin: 50px auto;
-            width: 600px;
         }
         table{
             background-color: white;
@@ -29,7 +19,7 @@
         }
 
         th, td{
-            padding: 20px;
+            padding: 25px;
         }
 
         thead{
@@ -52,44 +42,6 @@
 
     {{ parent() }}
 
-{#
-    <div class="ui equal width internally celled grid">
-        <div class="center aligned row">
-            <div class="column">
-                <ul>
-                    {% for item in viento_ahora %}
-                        <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="column">
-                <ul>
-                    {% for item in estado_cielo_ahora %}
-                        <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="ui equal width internally celled grid">
-        <div class="center aligned row">
-            <div class="column">
-                <ul>
-                    {% for item in viento_hoy %}
-                        <li>{{ item['periodo'] }} {{ item['velocidad'] }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="column">
-                <ul>
-                    {% for item in estado_cielo_ahora %}
-                        <li>{{ item['periodo'] }} {{ item['descripcion'] }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-#}
 
     {% if failed==true %}
         <div class="ui equal width grid">
@@ -104,30 +56,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="main-container">
-            <table>
-                <thead>
-                <tr>
-                    <th>       </th><th>Ahora</th><th>Hoy</th><th>Mañana</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td style="background-color: #246355">hola</td><td>hola</td><td>hola</td><td>hola</td>
-                </tr>
-                <tr>
-                    <th>cielo</th><th>{{ estado_cielo_ahora }}</th><th>{{ estado_cielo_hoy }}</th><th>{{ estado_cielo_manana }}</th>
-                    <th>Velocidad media viento</th><th>{{ viento_ahora }}</th><th>{{ viento_ahora }}</th><th>{{ viento_manana }}</th>
-                    <th>Precipitacion</th><th>{{ precipitacion_ahora }}</th><th>{{ precipitacion_hoy }}</th><th>{{ precipitacion_manana }}</th>
-                    <th>Cota de nieve</th><th>{{ cota_de_nieve_ahora }}</th><th>{{ cota_de_nieve_hoy }}</th><th>{{ cota_de_nieve_manana }}</th>
-                    <th>Tº Mínima</th><th>       </th><th>{{ temperatura_minima_hoy }}</th><th>{{ temperatura_minima_manana }}</th>
-                    <th>Tº máxima</th><th>       </th><th>{{ temperatura_maxima_hoy }}</th><th>{{ temperatura_maxima_manana }}</th>
-                </tr>
-            </table>
-        </div>
-
     {% else %}
-        <div class="main-container">
+        <div style="margin-top: 73px">
             <table>
                 <thead>
                 <tr>
@@ -135,57 +65,27 @@
                 </tr>
                 </thead>
                 <tr>
-                    <td style="background-color: #246355">hola</td><td>hola</td><td>hola</td><td>hola</td>
+                    <td style="background-color: #246355; color: white">cielo</td><td>{{ estado_cielo_ahora }}</td><td>{{ estado_cielo_hoy }}</td><td>{{ estado_cielo_manana }}</td>
                 </tr>
                 <tr>
-                    <td>cielo</td><td>{{ estado_cielo_ahora }}</td><td>{{ estado_cielo_hoy }}</td><td>{{ estado_cielo_manana }}</td>
+                    <td style="background-color: #246355; color: white">Velocidad media viento</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_manana }} km/h</td>
                 </tr>
                 <tr>
-                    <td>Velocidad media viento</td><td>{{ viento_ahora }}</td><td>{{ viento_ahora }}</td><td>{{ viento_manana }}</td>
-                </tr>
-                    <td>Precipitacion</td><td>{{ precipitacion_ahora }}</td><td>{{ precipitacion_hoy }}</td><td>{{ precipitacion_manana }}</td>
-                <tr>
-                    <td>Cota de nieve</td><td>{{ cota_de_nieve_ahora }}</td><td>{{ cota_de_nieve_hoy }}</td><td>{{ cota_de_nieve_manana }}</td>
+                    <td style="background-color: #246355; color: white">Probabilidad de Precipitacion</td><td>{{ precipitacion_ahora }}%</td><td>{{ precipitacion_hoy }}%</td><td>{{ precipitacion_manana }}%</td>
                 </tr>
                 <tr>
-                    <td>Tº Mínima</td><td>       </td><td>{{ temperatura_minima_hoy }}</td><td>{{ temperatura_minima_manana }}</td>
+                    <td style="background-color: #246355; color: white">Cota de nieve</td><td>{{ cota_de_nieve_ahora }}</td><td>{{ cota_de_nieve_hoy }}</td><td>{{ cota_de_nieve_manana }}</td>
                 </tr>
                 <tr>
-                    <td>Tº máxima</td><td>       </td><td>{{ temperatura_maxima_hoy }}</td><td>{{ temperatura_maxima_manana }}</td>
+                    <td style="background-color: #246355; color: white">Tº Mínima</td><td>----</td><td>{{ temperatura_minima_hoy }}ºC</td><td>{{ temperatura_minima_manana }}ºC</td>
                 </tr>
-
+                <tr>
+                    <td style="background-color: #246355; color: white">Tº máxima</td><td>----</td><td>{{ temperatura_maxima_hoy }}ºC</td><td>{{ temperatura_maxima_manana }}ºC</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #246355; color: white">Temperatura Actual</td><td>{{ temperatura_ahora }}</td>
+                </tr>
             </table>
         </div>
-        {#<div class="ui equal width internally celled grid">
-            <div></div>
-            <div class="center aligned row">
-                <div class="column">
-                    <ul>Ahora</ul>
-                    <ul>cielo: {{ estado_cielo_ahora }}</ul>
-                    <ul>viento: {{ viento_ahora }}</ul>
-                    <ul>precipitacion: {{ precipitacion_ahora }}</ul>
-                    <ul>cota de nieve: {{ cota_de_nieve_ahora }}</ul>
-                    <ul>temperatura: {{ temperatura_ahora }}</ul>
-                </div>
-                <div class="column">
-                    <ul>Hoy</ul>
-                    <ul>cielo: {{ estado_cielo_hoy }}</ul>
-                    <ul>viento medio: {{ viento_hoy }}</ul>
-                    <ul>precipitacion: {{ precipitacion_hoy }}</ul>
-                    <ul>cota de nieve: {{ cota_de_nieve_hoy }}</ul>
-                    <ul>temperatura maxima: {{ temperatura_maxima_hoy }}</ul>
-                    <ul>temperatura minima: {{ temperatura_minima_hoy }}</ul>
-                </div>
-                <div class="column">
-                    <ul>Mañana</ul>
-                    <ul>cielo: {{ estado_cielo_manana }}</ul>
-                    <ul>viento medio: {{ viento_manana }}</ul>
-                    <ul>precipitacion: {{ precipitacion_manana }}</ul>
-                    <ul>cota de nieve: {{ cota_de_nieve_manana }}</ul>
-                    <ul>temperatura maxima: {{ temperatura_maxima_manana }}</ul>
-                    <ul>temperatura minima: {{ temperatura_minima_manana }}</ul>
-                </div>
-            </div>
-        </div>#}
     {% endif %}
 {% endblock %}
