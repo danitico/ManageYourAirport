@@ -27,9 +27,9 @@ class Settings
     private $webhookURL;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $openSkyPassword;
+    private $flightsWindowsTime;
 
     public function getId()
     {
@@ -67,7 +67,6 @@ class Settings
                 "channel" => $this->getSlackChannel(),
                 "username" => "newUsersBot",
                 "text" => $message,
-                "icon_emoji" => ":elephant:"
             )
         );
 
@@ -83,14 +82,14 @@ class Settings
         return $this;
     }
 
-    public function getOpenSkyPassword(): ?string
+    public function getFlightsWindowsTime(): ?int
     {
-        return $this->openSkyPassword;
+        return $this->flightsWindowsTime;
     }
 
-    public function setOpenSkyPassword(?string $openSkyPassword): self
+    public function setFlightsWindowsTime(int $flightsWindowsTime): self
     {
-        $this->openSkyPassword = $openSkyPassword;
+        $this->flightsWindowsTime = $flightsWindowsTime;
 
         return $this;
     }

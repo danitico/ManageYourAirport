@@ -14,6 +14,7 @@ class SettingsFixtures extends Fixture
 
         $settigs->setWebhookURL("https://hooks.slack.com/services/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");
         $settigs->setSlackChannel("#general");
+        $settigs->setFlightsWindowsTime(3600);
 
         $manager->persist($settigs);
         $manager->flush();
