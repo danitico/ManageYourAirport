@@ -1,3 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Política de privacidad{% endblock %}
+
 {% block stylesheets %}
     <style>
         #ppBody
@@ -24,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
 {% endblock %}
 
-{% block container %}
+{% block body %}
     <div class="ui large top fixed hidden menu">
         <div class="ui container">
             <a href={{ path('homepage') }} class="active item">Home</a>
@@ -391,8 +395,5 @@
     <div class='innerText'>
         <br>Last Edited on 2018-05-14
     </div>
-{% endblock %}
-
-{% block body %}
 {% endblock %}
 

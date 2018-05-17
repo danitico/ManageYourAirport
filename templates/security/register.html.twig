@@ -1,3 +1,5 @@
+{% extends 'base.html.twig' %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
     <style type="text/css">
@@ -21,7 +23,9 @@
     </style>
 {% endblock %}
 
-{% block container %}
+{% block title %}Creación de cuenta{% endblock %}
+
+{% block body %}
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         <h2 class="ui teal image header">

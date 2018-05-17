@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}tracking{% endblock %}
+{% block title %}Mapa{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -53,7 +53,9 @@
             <a href="{{ path('homepage') }}">
                 <img class="logo" src="{{ asset('img/logo.png') }}">
             </a>            <a href={{ path('user_page') }} class="item">Inicio</a>
-            <a href="{{ path('flights') }}" class="item">Vuelos</a>
+            <a href={{ path('user_page') }} class="item">Inicio</a>
+            <a href="{{ path('flights_tracking_incomming') }}" class="item">Llegadas</a>
+            <a href="{{ path('flights_tracking_outcomming') }}" class="item">Salidas</a>
             <a href="{{ path('luggage') }}" class="item">Equipaje</a>
             <a href={{ path('user_tracking') }} class="item">Mapa</a>
             <div class="right menu">

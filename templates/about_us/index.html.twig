@@ -1,9 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About us{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
 
 {% endblock %}
 
-{% block container %}
+{% block body %}
     <div class="ui large top fixed hidden menu">
         <div class="ui container">
             <a href={{ path('homepage') }} class="active item">Home</a>
@@ -19,7 +23,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block body %}
 {% endblock %}

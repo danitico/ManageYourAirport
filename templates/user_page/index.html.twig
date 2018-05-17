@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    userpage
+    Pagina Principal
 {% endblock %}
 
 {% block stylesheets %}
@@ -59,12 +59,7 @@
                 <ul class="item">
                     <a href="{{ path('flights_tracking_outcomming') }}" class="ui button">Lista de vuelos de salida</a>
                 </ul>
-                <ul class="item">
-                    <a href="{{ path('flights') }}" class="ui button">mapa de aviones</a>
-                </ul>
             </div>
-
-
 
             <div class="column">
                 {% if is_granted('ROLE_ADMIN') %}

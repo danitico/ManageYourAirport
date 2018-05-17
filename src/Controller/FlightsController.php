@@ -8,16 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FlightsController extends Controller
 {
     /**
-     * @Route("/flights", name="flights")
-     */
-    public function flights()
-    {
-        return $this->render('flightsDepartures.html.twig', [
-            'controller_name' => 'FlightsController',
-        ]);
-    }
-
-    /**
      * @Route("/flights/track/outcomming", name="flights_tracking_outcomming")
      */
     public function tracking_outcomming()
