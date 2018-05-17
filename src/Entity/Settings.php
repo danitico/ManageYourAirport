@@ -26,6 +26,11 @@ class Settings
      */
     private $webhookURL;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $openSkyPassword;
+
     public function getId()
     {
         return $this->id;
@@ -74,6 +79,18 @@ class Settings
 
         $result = curl_exec($ch);
         curl_close($ch);
+
+        return $this;
+    }
+
+    public function getOpenSkyPassword(): ?string
+    {
+        return $this->openSkyPassword;
+    }
+
+    public function setOpenSkyPassword(?string $openSkyPassword): self
+    {
+        $this->openSkyPassword = $openSkyPassword;
 
         return $this;
     }

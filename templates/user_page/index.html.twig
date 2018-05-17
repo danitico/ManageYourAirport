@@ -21,27 +21,26 @@
         </div>
     </div>
 
-    <div class="ui equal width grid"">
+    <div class="ui equal width grid">
         <div></div>
         <div class="center aligned row">
             <div class="column">
                 <ul>Mapas</ul>
                 <ul class="item">
-                    <a href={{ path('user_tracking') }} class="ui button">Mapa</a>
+                    <a href="{{ path('user_tracking') }}" class="ui button">Mapa</a>
                 </ul>
                 <ul class="item">
-                    <a href={{ path('traffic') }} class="ui button">Tráfico</a>
+                    <a href="{{ path('traffic') }}" class="ui button">Tráfico</a>
                 </ul>
 
                 <ul>Equipaje</ul>
                 <ul class="item">
-                    <a href={{ path('luggage search') }} class="ui button">Mi equipaje</a>
+                    <a href="{{ path('luggage search') }}" class="ui button">Mi equipaje</a>
                 </ul>
+
+                <ul>Ayuda por chat</ul>
                 <ul class="item">
-                    <a href={{ path('luggage') }} class="ui button">Lista de equipaje</a>
-                </ul>
-                <ul class="item">
-                    <a href={{ path('lost luggage') }} class="ui button">Equipaje perdido</a>
+                    <a href="{{ path('watson') }}" class="ui button">watson</a>
                 </ul>
             </div>
 
@@ -50,22 +49,18 @@
             <div class="column">
                 <ul>Pronostico del tiempo</ul>
                 <ul class="item">
-                    <a href={{ path('weather') }} class="ui button">Tiempo</a>
+                    <a href="{{ path('weather') }}" class="ui button">Tiempo</a>
                 </ul>
 
-                <ul>Listado de vuelos</ul>
+                <ul>Vuelos</ul>
                 <ul class="item">
-                    <a href={{ path('flights') }} class="ui button">Vuelos</a>
+                    <a href="{{ path('flights tracking incomming') }}" class="ui button">Lista de vuelos de llegada</a>
                 </ul>
-
-                <ul>Vuelos en directo</ul>
                 <ul class="item">
-                    <a href={{ path('flights tracking') }} class="ui button">mapa de aviones</a>
+                    <a href="{{ path('flights tracking outcomming') }}" class="ui button">Lista de vuelos de salida</a>
                 </ul>
-
-                <ul>Ayuda por chat</ul>
                 <ul class="item">
-                    <a href={{ path('watson') }} class="ui button">watson</a>
+                    <a href="{{ path('flights') }}" class="ui button">mapa de aviones</a>
                 </ul>
             </div>
 
@@ -77,13 +72,20 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <ul>Especial para ti</ul>
                     <ul class="item">
-                        <a href={{ path('heatmap') }} class="ui button">Heatmap</a>
+                        <a href="{{ path('heatmap') }}" class="ui button">Heatmap</a>
                     </ul>
                     <ul class="item">
-                        <a href={{ path('admin') }} class="ui button">Administrar</a>
+                        <a href="{{ path('admin') }}" class="ui button">Administrar</a>
                     </ul>
                     <ul class="item">
-                        <a href={{ path('settings') }} class="ui button">Ajustes</a>
+                        <a href="{{ path('settings') }}" class="ui button">Ajustes</a>
+                    </ul>
+
+                    <ul class="item">
+                        <a href="{{ path('luggage') }}" class="ui button">Lista de equipaje</a>
+                    </ul>
+                    <ul class="item">
+                        <a href="{{ path('lost luggage') }}" class="ui button">Equipaje perdido</a>
                     </ul>
                 {% endif %}
             </div>
