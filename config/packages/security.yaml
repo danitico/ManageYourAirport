@@ -45,7 +45,7 @@ security:
         - { path: ^/watson, roles: [ROLE_USER, ROLE_ADMIN]}
         - { path: ^/trackeo_aviones, roles: [ROLE_ADMIN] }
         - { path: ^/settings, roles: [ROLE_ADMIN]}
-        - { path: ^/luggage, roles: [ROLE_ADMIN]}
         - { path: ^/luggage/lost, roles: [ROLE_ADMIN]}
         - { path: ^/luggage/search, roles: [ROLE_ADMIN, ROLE_USER]}
+        - { path: ^/luggage, roles: [ROLE_ADMIN]}
 
