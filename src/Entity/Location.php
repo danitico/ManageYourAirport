@@ -105,9 +105,9 @@ class Location
     public function __toString(): ?string
     {
         $string="";
-        $string.=$this->getLatitude();
+        $string.=(string) $this->getLatitude();
         $string.=",";
-        $string.=$this->getLongitude();
+        $string.=(string) $this->getLongitude();
         return $string;
     }
 }

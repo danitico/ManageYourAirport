@@ -50,14 +50,14 @@
     {% set longitude %}0{% endset %}
 
     {{ parent() }}
-    {#
-    <div id="floating-panel">
+
+    {#<div id="floating-panel">
         <button onclick="toggleHeatmap()">Toggle Heatmap</button>
         <button onclick="changeGradient()">Change gradient</button>
         <button onclick="changeRadius()">Change radius</button>
         <button onclick="changeOpacity()">Change opacity</button>
-    </div>
-    #}
+    </div>#}
+
 
     <div id="map"></div>
 
@@ -75,9 +75,9 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16 ,
-                center: {lat:37.914513 , lng: -4.719203},
-                mapTypeId: 'satellite'
+                zoom: 19 ,
+                center: {lat:37.844333 , lng: -4.843275},
+                mapTypeId: 'roadmap'
             });
 
             heatmap = new google.maps.visualization.HeatmapLayer({

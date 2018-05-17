@@ -37,11 +37,11 @@ class UserTrackingController extends Controller
 
             $user=$this->getUser();
             $user->setLocation($location);
-            $locationsCollection = $this->getDoctrine()->getRepository('App:LocationsCollection')->getCollection(1);
-            $locationsCollection[0]->addLocation($location);
+            $locationsCollection = $this->getDoctrine()->getRepository('App:LocationsCollection')->getCollection();
+            $locationsCollection->addLocation($location);
 
             $manager->persist($user);
-            $manager->persist($locationsCollection[0]);
+            $manager->persist($locationsCollection);
             $manager->flush();
             sleep(1);
             return $this->redirectToRoute('user_tracking');
@@ -62,6 +62,8 @@ class UserTrackingController extends Controller
     {
         $manager = $this->getDoctrine()->getManager();
         $locations = $manager->getRepository('App:Location')->getAllLocations();
+
+        dump($locations);
 
         return $this->render('user_tracking/heatmap.html.twig', [
             'controller_name' => 'LocationsController',

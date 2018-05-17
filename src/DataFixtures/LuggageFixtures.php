@@ -11,9 +11,10 @@ class LuggageFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $luggages = [
-            [ 123,false,],
-            [ 344,false,],
-            [ 2135123,true,],
+            [ 2,false,],
+            [ 3,true,],
+            [ 4,false,],
+            [ 5,false,],
         ];
 
         foreach ($luggages as $luggage){
