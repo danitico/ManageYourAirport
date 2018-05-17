@@ -119,6 +119,8 @@ class WeatherController extends Controller
             $cieloManana='Soleado';
         }
 
+        $failed = ($precipitacionAhora=="")&&($precipitacionHoy=="")&&($precipitacionManana=="");
+
 /*
         dump($vientoAhora);
         dump($cieloAhora);
@@ -143,6 +145,8 @@ class WeatherController extends Controller
 
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',
+
+            'failed' => true,
 
             'viento_ahora' => $vientoAhora,
             'estado_cielo_ahora' => $cieloAhora,

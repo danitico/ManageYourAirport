@@ -13,7 +13,7 @@
     {{ parent() }}
 
 
-    <div class="ui equal width internally celled grid">
+    <div class="ui equal width grid">
         <div class="center aligned row">
             <div class="column">
                 <ul></ul>{#for filling the gap#}
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="ui equal width internally celled grid">
+    <div class="ui equal width grid"">
         <div></div>
         <div class="center aligned row">
             <div class="column">
@@ -29,7 +29,9 @@
                 <ul class="item">
                     <a href={{ path('user_tracking') }} class="ui button">Mapa</a>
                 </ul>
-
+                <ul class="item">
+                    <a href={{ path('traffic') }} class="ui button">Tráfico</a>
+                </ul>
 
                 <ul>Equipaje</ul>
                 <ul class="item">
@@ -60,15 +62,17 @@
                 <ul class="item">
                     <a href={{ path('flights tracking') }} class="ui button">mapa de aviones</a>
                 </ul>
+
+                <ul>Ayuda por chat</ul>
+                <ul class="item">
+                    <a href={{ path('watson') }} class="ui button">watson</a>
+                </ul>
             </div>
 
 
 
             <div class="column">
-                <ul>Ayuda por chat</ul>
-                <ul class="item">
-                    <a href={{ path('watson') }} class="ui button">watson</a>
-                </ul>
+
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <ul>Especial para ti</ul>
