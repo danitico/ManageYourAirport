@@ -43,9 +43,9 @@ class AppFixtures extends Fixture
 
 
         $users = [
-            [ 'admin',    ['ROLE_ADMIN',], 'admin@gmail.com'             ,[37.844537, -4.843806],[ 1,false,],],
-            [ 'diego',    ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',null                  ,null],
-            [ 'danitico', ['ROLE_USER' ,], 'danitico@gmail.com'          ,null                  ,null],
+            [ 'admin',    ['ROLE_ADMIN',], 'admin@gmail.com'             ,[37.844537, -4.843806],[[1,false]                                ,],],
+            [ 'diego',    ['ROLE_USER' ,], 'good.old.seg.fault@gmail.com',null                  ,[[6,false],[10,true],[11,false],[13,false],],],
+            [ 'danitico', ['ROLE_USER' ,], 'danitico@gmail.com'          ,null                  ,null                                        ,],
         ];
         foreach ($users as $user) {
             $entity = new User();
@@ -65,15 +65,16 @@ class AppFixtures extends Fixture
                 $entity->setLocation($location);
             }
             if ($user[4] != null) {
-                $luggage = new Luggage();
+                foreach ($user[4] as $luggages){
+                    $luggage = new Luggage();
 
-                $luggage->setAirlineId($user[4][0]);
-                $luggage->setIsLost   ($user[4][1]);
+                    $luggage->setAirlineId($luggages[0]);
+                    $luggage->setIsLost   ($luggages[1]);
 
-                $entity->addLuggage($luggage);
+                    $entity->addLuggage($luggage);
+                    $manager->persist($luggage);
+                }
             }
-
-            $manager->persist($luggage);
             $manager->persist($location);
             $manager->persist($entity);
 
