@@ -20,7 +20,7 @@ class LuggageController extends Controller
         return $this->render('luggage/luggage_printer.html.twig', [
             'controller_name' => 'LuggageController',
             'luggages' => $luggages,
-            'header' => "Maletas perdidas",
+            'header' => "Lost Luggages",
         ]);
     }
 
@@ -34,7 +34,7 @@ class LuggageController extends Controller
         return $this->render('luggage/luggage_printer.html.twig', [
             'controller_name' => 'LuggageController',
             'luggages' => $luggages,
-            'header' => "Todas las maletas",
+            'header' => "Luggages",
         ]);
     }
 

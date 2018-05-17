@@ -1,10 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{{ header }}{% endblock %}
 
 {% block stylesheets %}
 
     {{ parent() }}
+    <style>
+        #main-container{
+            margin: 150px auto;
+            width: 600px;
+        }
+        table{
+            background-color: white;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 73px;
+        }
+
+        th, td{
+            padding: 20px;
+        }
+
+        thead{
+            background-color: #246355;
+            border-bottom: solid 5px #0F362D;
+            color: white;
+        }
+
+        tr:nth-child(even){
+            background-color: #ddd;
+        }
+
+        tr:hover{
+            background-color: #369681;
+            color: white
+        }
+    </style>
 
 
 {% endblock %}
@@ -12,46 +44,24 @@
 {% block body %}
 
     {{ parent() }}
-    <div class="ui equal width internally celled grid">
-        <div class="center aligned row">
-            <div class="column">
-                <ul></ul>{#for filling the gap#}
-            </div>
-        </div>
-    </div>
 
-    <div class="ui equal width internally celled grid">
-        <div class="center aligned row">
-            <div class="column">
-                <ul>{{ header }}</ul>
-            </div>
-        </div>
-    </div>
-    <div class="ui equal width internally celled grid">
-        <div class="center aligned row">
-
-            <div class="column">
-                <ul>ID</ul>
+    <div class="main-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th><th>Propietario</th><th>Estado</th>
+            </tr>
+            </thead>
+            {% if luggages %}
                 {% for luggage in luggages %}
-                    <ul>{{ luggage.airlineId }}</ul>
+                    <tr>
+                        <td>{{ luggage.airlineId }}</td><td>{% if luggage.owner %}{{ luggage.owner }}{% else %}Sin propieratio{% endif %}</td><td>{% if luggage.isLost==1 %}Perdida{% else %}Localizada{% endif %}</td>
+                    </tr>
                 {% endfor %}
-            </div>
-
-            <div class="column">
-                <ul>Propieratio</ul>
-                {% for luggage in luggages %}
-                    <ul>{% if luggage.owner %}{{ luggage.owner }}{% else %}Sin propieratio{% endif %}</ul>
-                {% endfor %}
-            </div>
-
-            <div class="column">
-                <ul>Estado</ul>
-                {% for luggage in luggages %}
-                    <ul>{% if luggage.isLost==1 %}Perdida{% else %}Localizada{% endif %}</ul>
-                {% endfor %}
-            </div>
-
-        </div>
+            {% else %}
+                <td>----</td><td>----</td><td>----</td>
+            {% endif %}
+        </table>
     </div>
 
 {% endblock %}
