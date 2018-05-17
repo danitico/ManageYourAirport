@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Form\SettingsType;
+use App\Entity\Settings;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,8 +17,12 @@ class SettingsController extends Controller
     public function index(Request $request)
     {
         $manager=$this->getDoctrine()->getManager();
-        $settings=$manager->getRepository('App:Settings')->getSettings();
-        $form=$this->createForm(SettingsType::class, $settings);
+        $settings = new Settings();
+        $form=$this->createFormBuilder($settings)
+            ->add('slackChannel', TextType::class, array('label' => 'Channel'))
+            ->add('webhookURL', TextType::class, array('label' => 'Webhook'))
+            ->add('save', SubmitType::class, array('label' => 'Enviar'))
+            ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())

@@ -3,10 +3,22 @@
 {% block title %}Settings{% endblock %}
 
 {% block body %}
+    <div class="ui middle aligned center aligned grid" style="background-color: #DADADA;">
+        <div class="row" style="margin-top: 220px; margin-bottom: 240px">
+            <div class="column">
+                <h2 class="ui teal image header">
+                    <img src="{{ asset('img/logo.png') }}" class="image">
+                    <div class="content">
+                        ManageYourAirport
+                    </div>
+                </h2>
 
-    {{ form_start(form) }}
-        {{ form_row(form.slackChannel ) }}
-        {{ form_row(form.webhookURL ) }}
-    {{ form_end(form) }}
+                {{ form_start(form) }}
+                    {{ form_row(form.slackChannel ) }}
+                    {{ form_row(form.webhookURL ) }}
+                {{ form_end(form) }}
 
+            </div>
+        </div>
+    </div>
 {% endblock %}

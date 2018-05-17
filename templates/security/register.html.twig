@@ -44,31 +44,31 @@
             {% endif %}
             {#<div class="ui error message"></div>#}
 
-            <div class="field">
+            <div class="field" style="margin-top: 3px">
                 <div class="ui left icon input">
                     <i class="user icon"></i>
                     {{ form_widget(form.username, { attr: { placeholder: form.username.vars.label } }) }}
                 </div>
             </div>
-            <div class="field">
+            <div class="field" style="margin-top: 3px">
                 <div class="ui left icon input">
                     <i class="mail icon"></i>
                     {{ form_widget(form.email, { attr: { placeholder: form.email.vars.label } }) }}
                 </div>
             </div>
-            <div class="field">
+            <div class="field" style="margin-top: 3px">
                 <div class="ui left icon input">
                     <i class="key icon"></i>
                     {{ form_widget(form.plainPassword.first, { attr: { placeholder: form.plainPassword.first.vars.label } }) }}
                 </div>
             </div>
-            <div class="field">
+            <div class="field" style="margin-top: 3px">
                 <div class="ui left icon input">
                     <i class="key icon"></i>
                     {{ form_widget(form.plainPassword.second, { attr: { placeholder: form.plainPassword.second.vars.label } }) }}
                 </div>
             </div>
-            <button class="ui fluid large teal submit button">Sign Up</button>
+            <button class="ui fluid large teal submit button" style="margin-top: 3px">Sign Up</button>
         </div>
     {{ form_end(form) }}
 

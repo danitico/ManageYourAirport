@@ -8,16 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css"/>
     <style>
     #contenedor{
-        margin-top: 73px;
+        margin-top: 150px;
 /*        margin: auto;*/
         max-width: 800px;
         max-height: 800px;
         margin-left: 275px;
-        -moz-border-radius: 12px;
-        -o-border-radius: 12px;
-        border-radius: 12px;
-        -webkit-border-radius: 12px;
-
     }
 
     #conversaciones{
@@ -26,28 +21,34 @@
         border:1px solid #CCC;
         overflow-y: scroll;
         position: relative;
+        -moz-border-radius: 12px;
+        -o-border-radius: 12px;
+        border-radius: 12px;
+        -webkit-border-radius: 12px;
+
     }
     </style>
+
 {% endblock %}
 
 {% block body %}
     {{ parent() }}
-    <div style="background-image: url('img/white_logo.png')">
-        <div id="contenedor" style="background-color: #DADADA;">
-            <h3 style="text-align: center">Chat con Manage Your Airport</h3>
-            <div id="conversaciones">
-                {% for mensaje in mensajes %}
-                    <b>{{ "Tú: " }}</b> {{ mensaje.send }} <br>
-                    {% for recibido in mensaje.received %}
-                        <b>{{ "Watson: " }}</b> {{ recibido }} <br>
-                    {% endfor %}
+
+    <div id="contenedor">
+        <h3 style="text-align: center">Chat con Manage Your Airport</h3>
+        <div id="conversaciones" style="background-color: #DADADA">
+            {% for mensaje in mensajes %}
+                <b>{{ "Tú: " }}</b> {{ mensaje.send }} <br>
+                {% for recibido in mensaje.received %}
+                    <b>{{ "Watson: " }}</b> {{ recibido }} <br>
                 {% endfor %}
-            </div>
-            <div style="text-align: center">
-                {{ form_start(form) }}
-                    {{ form_row(form.send) }}
-                {{ form_end(form) }}
-            </div>
+            {% endfor %}
+        </div>
+        <div style="text-align: center">
+            {{ form_start(form) }}
+                <div style="margin-left: -50px">{{ form_row(form.send) }}</div>
+                <div style="margin-top: 10px"></div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
