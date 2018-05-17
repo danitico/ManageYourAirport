@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    userpage
+    Userpage
 {% endblock %}
 
 {% block stylesheets %}
@@ -25,7 +25,7 @@
         <div></div>
         <div class="center aligned row">
             <div class="column">
-                <ul>Mapas</ul>
+                <ul><b>Mapas</b></ul>
                 <ul class="item">
                     <a href="{{ path('user_tracking') }}" class="ui button">Mapa</a>
                 </ul>
@@ -33,12 +33,12 @@
                     <a href="{{ path('traffic') }}" class="ui button">Tráfico</a>
                 </ul>
 
-                <ul>Equipaje</ul>
+                <ul><b>Equipaje</b></ul>
                 <ul class="item">
                     <a href="{{ path('luggage search') }}" class="ui button">Mi equipaje</a>
                 </ul>
 
-                <ul>Ayuda por chat</ul>
+                <ul><b>Ayuda por chat</b></ul>
                 <ul class="item">
                     <a href="{{ path('watson') }}" class="ui button">watson</a>
                 </ul>
@@ -47,12 +47,12 @@
 
 
             <div class="column">
-                <ul>Pronostico del tiempo</ul>
+                <ul><b>Pronostico del tiempo</b></ul>
                 <ul class="item">
                     <a href="{{ path('weather') }}" class="ui button">Tiempo</a>
                 </ul>
 
-                <ul>Vuelos</ul>
+                <ul><b>Vuelos</b></ul>
                 <ul class="item">
                     <a href="{{ path('flights_tracking_incomming') }}" class="ui button">Lista de vuelos de llegada</a>
                 </ul>
@@ -68,7 +68,7 @@
 
             <div class="column">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <ul>Especial para ti</ul>
+                    <ul><b>Especial para ti</b></ul>
                     <ul class="item">
                         <a href="{{ path('heatmap') }}" class="ui button">Heatmap</a>
                     </ul>
