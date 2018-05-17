@@ -12,9 +12,11 @@ class WeatherController extends Controller
      */
     public function index(/*Request $request*/)
     {
+        $url_aemet="https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/14021/?api_key=".getenv('AEMET_KEY')."";
+        dump($url_aemet);
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/diaria/14021/?api_key=".getenv('AEMET_KEY')."",
+            CURLOPT_URL => $url_aemet,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -57,7 +59,6 @@ class WeatherController extends Controller
 
         $response1 = json_decode($response1, true);
 
-
         date_default_timezone_set("Europe/Madrid");
         $time=time();
 
@@ -83,7 +84,7 @@ class WeatherController extends Controller
         $cieloAhora=$response1[0]['prediccion']['dia'][0]['estadoCielo'][$timeindex]['descripcion'];
         $cotaNieveAhora=$response1[0]['prediccion']['dia'][0]['cotaNieveProv'][$timeindex]['value'];
         $precipitacionAhora=$response1[0]['prediccion']['dia'][0]['probPrecipitacion'][$timeindex]['value'];
-        $temperaturaAhora=$response1[0]['prediccion']['dia'][0]['probPrecipitacion'][$timeindextemperatura]['value'];
+        $temperaturaAhora=$response1[0]['prediccion']['dia'][0]['temperatura']['dato'][$timeindextemperatura]['value'];
         if ($cotaNieveAhora==""){
             $cotaNieveAhora='no aplicable';
         }
@@ -121,31 +122,8 @@ class WeatherController extends Controller
 
         $failed = ($precipitacionAhora=="")&&($precipitacionHoy=="")&&($precipitacionManana=="");
 
-/*
-        dump($vientoAhora);
-        dump($cieloAhora);
-        dump($cotaNieveAhora);
-        dump($precipitacionAhora);
-        dump($temperaturaAhora);
-        dump($vientoHoy);
-        dump($cieloHoy);
-        dump($cotaNieveHoy);
-        dump($precipitacionHoy);
-        dump($temperaturaMaximaHoy);
-        dump($temperaturaMinimaHoy);
-        dump($vientoManana);
-        dump($cieloManana);
-        dump($cotaNieveManana);
-        dump($precipitacionManana);
-        dump($temperaturaMaximaManana);
-        dump($temperaturaMinimaManana);
-*/
-
-
-
         return $this->render('weather/index.html.twig', [
             'controller_name' => 'WeatherController',
-
             'failed' => $failed,
 
             'viento_ahora' => $vientoAhora,

@@ -8,17 +8,17 @@
             <div class="column">
                 <h2 class="ui teal image header">
                     <img src="{{ asset('img/logo.png') }}" class="image">
-                    <div class="content">
+                    {#<div class="content">#}
                         ManageYourAirport
-                    </div>
+                    {#</div>#}
                 </h2>
-
-                {{ form_start(form) }}
-                    {{ form_row(form.slackChannel ) }}
-                    {{ form_row(form.webhookURL ) }}
-                    {{ form_row(form.flightsWindowsTime ) }}
-                {{ form_end(form) }}
-
+                <div style="text-align: center;margin-left: 10px">
+                    {{ form_start(form) }}
+                        <div style="margin-left: -8px; margin-bottom: 5px">{{ form_row(form.slackChannel ) }}</div>
+                        <div style="margin-left: -17px; margin-bottom: 5px">{{ form_row(form.webhookURL ) }}</div>
+                        <div style="margin-left: -155px; margin-bottom: 5px">{{ form_row(form.flightsWindowsTime ) }}</div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

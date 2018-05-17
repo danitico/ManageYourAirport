@@ -31,7 +31,7 @@
             <div class="right menu">
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="item">
-                        <a href="" class="ui inverted button">Slack</a>
+                        <a href={{ path('slack_main_page') }} class="ui inverted button">Slack</a>
                     </div>
                     <div class="item">
                         <a href={{ path('heatmap') }} class="ui inverted button">Heatmap</a>

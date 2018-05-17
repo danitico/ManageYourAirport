@@ -20,9 +20,9 @@ class SettingsController extends Controller
         $manager=$this->getDoctrine()->getManager();
         $settings = $manager->getRepository('App:Settings')->getSettings();
         $form=$this->createFormBuilder($settings)
-            ->add('slackChannel', TextType::class, array('label' => 'Channel'))
-            ->add('webhookURL', TextType::class, array('label' => 'Webhook'))
-            ->add('flightsWindowsTime', NumberType::class, array('label' => 'Ventana de tiempo para aviones'))
+            ->add('slackChannel', TextType::class, array('label' => 'Channel '))
+            ->add('webhookURL', TextType::class, array('label' => 'Webhook '))
+            ->add('flightsWindowsTime', NumberType::class, array('label' => 'Ventana de tiempo para aviones '))
             ->add('save', SubmitType::class, array('label' => 'Enviar'))
             ->getForm();
 

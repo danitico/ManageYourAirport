@@ -8,18 +8,8 @@
         body {
             background-color: #DADADA;
         }
-        body > .grid {
-            height: 100%;
-        }
-        .image {
-            margin-top: -100px;
-        }
         .column {
             max-width: 450px;
-        }
-        main-container{
-            margin: 50px auto;
-            width: 600px;
         }
         table{
             background-color: white;
@@ -30,7 +20,7 @@
         }
 
         th, td{
-            padding: 20px;
+            padding: 25px;
         }
 
         thead{
@@ -66,8 +56,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="main-container">
+    {% else %}
+        <div style="margin-top: 73px">
             <table>
                 <thead>
                 <tr>
@@ -75,76 +65,29 @@
                 </tr>
                 </thead>
                 <tr>
-                    <td style="background-color: #246355">hola</td><td>hola</td><td>hola</td><td>hola</td>
+                    <td style="background-color: #246355; color: white">cielo</td><td>{{ estado_cielo_ahora }}</td><td>{{ estado_cielo_hoy }}</td><td>{{ estado_cielo_manana }}</td>
                 </tr>
                 <tr>
-                    <th>cielo</th><th>{{ estado_cielo_ahora }}</th><th>{{ estado_cielo_hoy }}</th><th>{{ estado_cielo_manana }}</th>
-                    <th>Velocidad media viento</th><th>{{ viento_ahora }}</th><th>{{ viento_ahora }}</th><th>{{ viento_manana }}</th>
-                    <th>Precipitacion</th><th>{{ precipitacion_ahora }}</th><th>{{ precipitacion_hoy }}</th><th>{{ precipitacion_manana }}</th>
-                    <th>Cota de nieve</th><th>{{ cota_de_nieve_ahora }}</th><th>{{ cota_de_nieve_hoy }}</th><th>{{ cota_de_nieve_manana }}</th>
-                    <th>Tº Mínima</th><th>       </th><th>{{ temperatura_minima_hoy }}</th><th>{{ temperatura_minima_manana }}</th>
-                    <th>Tº máxima</th><th>       </th><th>{{ temperatura_maxima_hoy }}</th><th>{{ temperatura_maxima_manana }}</th>
+                    <td style="background-color: #246355; color: white">Velocidad media viento</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_ahora }} km/h</td><td>{{ viento_manana }} km/h</td>
+                </tr>
+
+                <tr>
+                    <td style="background-color: #246355; color: white">Probabilidad de Precipitacion</td><td>{{ precipitacion_ahora }}%</td><td>{{ precipitacion_hoy }}%</td><td>{{ precipitacion_manana }}%</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #246355; color: white">Cota de nieve</td><td>{{ cota_de_nieve_ahora }}</td><td>{{ cota_de_nieve_hoy }}</td><td>{{ cota_de_nieve_manana }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #246355; color: white">Tº Mínima</td><td>----</td><td>{{ temperatura_minima_hoy }}ºC</td><td>{{ temperatura_minima_manana }}ºC</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #246355; color: white">Tº máxima</td><td>----</td><td>{{ temperatura_maxima_hoy }}ºC</td><td>{{ temperatura_maxima_manana }}ºC</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #246355; color: white">Temperatura Actual</td><td>{{ temperatura_ahora }}</td>
                 </tr>
             </table>
         </div>
-
-    {% else %}
-
-        <div class="main-container">
-            <table>
-                <thead>
-                <tr>
-                    <th>Medición<th>Ahora</th><th>Hoy</th><th>Mañana</th>
-                </tr>
-                </thead>
-
-                <tr>
-                    <td>Cielo</td>
-                    <td>{{ estado_cielo_ahora }}</td>
-                    <td>{{ estado_cielo_hoy }}</td>
-                    <td>{{ estado_cielo_manana }}</td>
-                </tr>
-                <tr>
-                    <td>Precipitación</td>
-                    <td>{{ precipitacion_ahora }}</td>
-                    <td>{{ precipitacion_hoy }}</td>
-                    <td>{{ precipitacion_manana }}</td>
-               </tr>
-                <tr>
-                    <td>Temperatura Actual</td>
-                    <td>{{ temperatura_ahora }}</td>
-                    <td>---</td>
-                    <td>---</td>
-                </tr>
-                <tr>
-                   <td>Temperatura Minima</td>
-                    <td>---</td>
-                    <td>{{ temperatura_minima_hoy }}</td>
-                    <td>{{ temperatura_minima_manana }}</td>
-                </tr>
-                <tr>
-                    <td>Temperatura Máxima</td>
-                    <td>---</td>
-                    <td>{{ temperatura_maxima_hoy }}</td>
-                    <td>{{ temperatura_maxima_manana }}</td>
-                </tr>
-                <tr>
-                    <td>Viento</td>
-                    <td>{{ viento_ahora }}</td>
-                    <td>{{ viento_hoy }}</td>
-                    <td>{{ viento_manana }}</td>
-                </tr>
-                <tr>
-                    <td>Cota de nieve</td>
-                    <td>{{ cota_de_nieve_ahora }}</td>
-                    <td>{{ cota_de_nieve_hoy }}</td>
-                    <td>{{ cota_de_nieve_manana }}</td>
-                </tr>
-
-            </table>
-        </div>
-
-
     {% endif %}
 
 {% endblock %}
