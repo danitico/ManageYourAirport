@@ -34,7 +34,7 @@ class WatsonController extends Controller
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/" . getenv('WORKSPACE') . "/message?version=2018-02-16",
-                CURLOPT_USERPWD => getenv('USERNAME_WATSON') . ":" . getenv('PASSWORD'),
+                CURLOPT_USERPWD => getenv('USERNAME_WATSON') . ":" . getenv('PASSWORD_WATSON'),
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
