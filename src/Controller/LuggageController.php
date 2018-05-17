@@ -46,14 +46,22 @@ class LuggageController extends Controller
     {
         $ent=new Luggage();
         $form=$this->createForm(LuggageType::class, $ent);
+        $filtered_luggage=[];
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
             $luggages=$this->getDoctrine()->getRepository('App:Luggage')->findById($ent->getAirlineId());
+            foreach ($luggages as $luggage){
+                if ($luggage->getOwner()==null){
+                    $filtered_luggage[]=$luggage;
+                }elseif ($luggage->getOwner()===$this->getUser()){
+                    $filtered_luggage[]=$luggage;
+                }
+            }
             return $this->render('luggage/search_luggage.html.twig', [
                 'controller_name' => 'LuggageController',
-                'luggages' => $luggages,
+                'luggages' => $filtered_luggage,
                 'form' => $form->createView(),
                 'header' => "Resultados de la busqueda",
             ]);
