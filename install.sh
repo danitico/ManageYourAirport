@@ -19,6 +19,6 @@ echo "Se procede a cargar los fixtures"
 php bin/console doc:fix:load
 
 echo "Para iniciar el servidor se debe de poner el siguiente comando"
-php bin/console server:run
+echo "php bin/console server:run"
 
 
