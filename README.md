@@ -5,8 +5,11 @@ Our Software includes:
 
 # Contributors
 Daniel Ranchal Parrado - [danitico](https://github.com/danitico)  
+
 Diego Rodriguez Riera - [riera90](https://github.com/riera90)  
+
 Juan Pedro Ruiz Bajo - [juanperb98](https://github.com/juanperb98)
+
 Jose Manuel Cuevas Muñoz - [chema969](https://github.com/chema969)
 
 # Licence
