@@ -1,4 +1,7 @@
 # ManageYourAirport
+![](https://github.com/danitico/ManageYourAirport/blob/master/public/img/white_logo.png)
+
+
 Manage your airport is a fast yet easy way of controlling your airport.  
 Our Software includes:
 - Planes, Luggage, and User tracking (following all privacy concern laws.).
