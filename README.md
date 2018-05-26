@@ -4,7 +4,7 @@
 
 Manage your airport is a fast yet easy way of controlling your airport.  
 Our Software includes:
-- Planes, Luggage, and User tracking (following all privacy concern laws.).
+- Planes, Luggage, and User tracking (~~following all privacy concern laws.~~ (GDPR is missing)). 
 
 # Contributors
 - Daniel Ranchal Parrado - [danitico](https://github.com/danitico)
